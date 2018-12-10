@@ -96,7 +96,8 @@ class ViewController: UIViewController {
         manager.isEnableTakePhoto = true
         manager.isEnableRecordVideo = true
         manager.maxRecordDuration = 9
-        manager.isShowClipperView = true
+        //此属性只截取取框内图像。并且不能摄像，只能拍照
+//        manager.isShowClipperView = true
         manager.presentCameraController()
         manager.completionBack = {[weak self] (arr) in
             self?.photoView.image = arr?.first?.image
