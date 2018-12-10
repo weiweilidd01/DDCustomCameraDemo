@@ -95,8 +95,9 @@ class ViewController: UIViewController {
     @IBAction func takePicAction(_ sender: Any) {
         manager.isEnableTakePhoto = true
         manager.isEnableRecordVideo = true
-        manager.presentCameraController()
         manager.maxRecordDuration = 9
+        manager.isShowClipperView = true
+        manager.presentCameraController()
         manager.completionBack = {[weak self] (arr) in
             self?.photoView.image = arr?.first?.image
             self?.getPath(asset: arr?.first?.asset)

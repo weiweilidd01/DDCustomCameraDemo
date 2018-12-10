@@ -117,6 +117,16 @@ class DDCustomCameraToolView: UIView {
     //layer圆圈的颜色
     public var circleProgressColor: UIColor = UIColor(red: 99.0/255.0, green: 181.0/255.0, blue: 244.0/255.0, alpha: 1)
     
+    //是否获取限制区域中的图片
+    public var isShowClipperView: Bool? {
+        didSet {
+            if isShowClipperView == true {
+                tipLab.removeFromSuperview()
+                photoAlbumBtn.removeFromSuperview()
+            }
+        }
+    }
+    
     //是否允许拍照
     public var isEnableTakePhoto: Bool? {
         didSet {
@@ -234,8 +244,9 @@ private extension DDCustomCameraToolView {
         addSubview(bottomView)
         addSubview(shootBtn)
         addSubview(photoAlbumBtn)
-        photoAlbumBtn.frame = CGRect(x: 60, y: bounds.size.height/2-25/2, width: 25, height: 25)
         addSubview(tipLab)
+        photoAlbumBtn.frame = CGRect(x: 60, y: bounds.size.height/2-25/2, width: 25, height: 25)
+        
         addSubview(cancelBtn)
         addSubview(doneBtn)
         doneBtn.frame = bottomView.frame

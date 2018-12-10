@@ -56,7 +56,11 @@ class DDCustomCameraController: UIViewController {
     public var doneBlock: ((UIImage?, URL?)->())?
     //从相册选择图片回调
     public var selectedAlbumBlock: (([DDPhotoGridCellModel]?)->())?
-
+    //是否获取限制区域中的图片
+    public var isShowClipperView: Bool?
+    //限制区域的大小
+    public var clipperSize: CGSize?
+    
     //会话
     private lazy var session: AVCaptureSession = {
         let session = AVCaptureSession()
@@ -142,6 +146,12 @@ class DDCustomCameraController: UIViewController {
     private var captureDevice: AVCaptureDevice?
     //相册管理
     private var pickermanager: DDPhotoPickerManager?
+    //拍照限制区域框
+    private lazy var clipperView: DDClipperView = {
+        let clipperView = DDClipperView(frame: view.bounds)
+        clipperView.clipperSize = clipperSize
+        return clipperView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -309,9 +319,13 @@ extension DDCustomCameraController: DDCustomCameraToolViewDelegate {
             }
           
             let image = UIImage(data: data)
-            self?.takedImage = image
+            if self?.isShowClipperView == true {
+                self?.takedImage = self?.clipImg(image: image)
+            } else {
+                self?.takedImage = image
+            }
             self?.takedImageView.isHidden = false
-            self?.takedImageView.image = image
+            self?.takedImageView.image = self?.takedImage
             self?.session.stopRunning()
         })
     }
@@ -359,7 +373,7 @@ extension DDCustomCameraController: DDCustomCameraToolViewDelegate {
 }
 
 // MARK: - AVCaptureFileOutputRecordingDelegate
-extension DDCustomCameraController:  AVCaptureFileOutputRecordingDelegate {
+extension DDCustomCameraController: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
         toolView.startAnimate()
     }
@@ -385,6 +399,58 @@ extension DDCustomCameraController:  AVCaptureFileOutputRecordingDelegate {
 }
 
 private extension DDCustomCameraController {
+    
+    //截图限制区域的图片
+    func clipImg(image: UIImage?) -> UIImage? {
+        guard let image = image else {
+            return nil
+        }
+        let scale: CGFloat = 3.0
+        let scaleImage = scaleToSize(image: image, size: view.frame.size, scale: scale)
+        let rect = view.convert(clipperView.clipperImgView?.frame ?? CGRect.zero, to: view)
+        let rect2 = CGRect(x: rect.origin.x * scale, y: rect.origin.y * scale, width: rect.size.width * scale, height: rect.size.height * scale)
+        let resultImage = imageFromImage(imageFromImage: scaleImage, inRext: rect2)
+        
+        return resultImage
+    }
+    
+    func scaleToSize(image: UIImage?, size: CGSize, scale: CGFloat) -> UIImage? {
+        guard let image = image  else {
+            return nil
+        }
+        UIGraphicsBeginImageContextWithOptions(size, false, scale); //此处将画布放大两倍，这样在retina屏截取时不会影响像素
+//
+//        // 得到图片上下文，指定绘制范围
+//        UIGraphicsBeginImageContext(size);
+        // 将图片按照指定大小绘制
+        image.draw(in: CGRect(x:0,y:0,width:size.width,height:size.height))
+        // 从当前图片上下文中导出图片
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        // 当前图片上下文出栈
+        UIGraphicsEndImageContext();
+        // 返回新的改变大小后的图片
+        return img
+    }
+    
+    //2.实现这个方法,,就拿到了截取后的照片.
+    func imageFromImage(imageFromImage:UIImage?, inRext:CGRect) -> UIImage? {
+        guard let imageFromImage = imageFromImage  else {
+            return nil
+        }
+        
+        //将UIImage转换成CGImageRef
+        //按照给定的矩形区域进行剪裁
+        guard let sourceImageRef:CGImage = imageFromImage.cgImage,
+            let newImageRef:CGImage = sourceImageRef.cropping(to: inRext) else {
+            return nil
+        }
+        
+        //将CGImageRef转换成UIImage
+        let img:UIImage = UIImage.init(cgImage: newImageRef)
+        //返回剪裁后的图片
+        return img
+    }
+
     /// 获取视屏的最后一帧
     ///
     /// - Parameters:
@@ -452,11 +518,16 @@ private extension DDCustomCameraController {
     
     func setupUI() {
         view.backgroundColor = UIColor.black
+        if isShowClipperView == true {
+            view.addSubview(clipperView)
+        }
+        
         toolView.isEnableTakePhoto = isEnableTakePhoto
         toolView.isEnableRecordVideo = isEnableRecordVideo
         toolView.circleProgressColor = circleProgressColor
         toolView.maxRecordDuration = maxRecordDuration
         toolView.delegate = self
+        toolView.isShowClipperView = isShowClipperView
         view.addSubview(toolView)
       
         view.addSubview(toggleCameraBtn)
@@ -581,9 +652,13 @@ private extension DDCustomCameraController {
     }
     
     @objc func handleDeviceMotion(_ deviceMotion: CMDeviceMotion?) {
+        if isShowClipperView == true {
+            orientation = .portrait
+            return
+        }
         let x = deviceMotion?.gravity.x ?? 0.0
         let y = deviceMotion?.gravity.y ?? 0.0
-        
+
         if fabs(y) >= fabs(x) {
             if y >= 0 {
                 orientation = .portraitUpsideDown

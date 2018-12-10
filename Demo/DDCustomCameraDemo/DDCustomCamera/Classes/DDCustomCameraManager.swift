@@ -67,6 +67,11 @@ public class DDCustomCameraManager: NSObject {
     //选择尺寸
     public var sessionPreset: DDCaptureSessionPreset = .preset1280x720
     
+    //是否获取限制区域中的图片
+    public var isShowClipperView: Bool = false
+    //限制区域的大小
+    public var clipperSize: CGSize = CGSize(width: 250, height: 400)
+    
     public override init() {
         super.init()
     }
@@ -98,17 +103,14 @@ extension DDCustomCameraManager {
         }
         
         if isHavePhotoLibraryAuthority() == false {
-//            showAlertNoAuthority("请在iPhone的\"设置-隐私-照片\"选项中，允许访问您的照片")
             return
         }
         
         if isHavaMicrophoneAuthority() == false {
-//            showAlertNoAuthority("请在iPhone的\"设置-隐私-麦克风\"选项中，允许访问您的麦克风")
             return
         }
         
         if isHaveCameraAuthority() == false {
-//            showAlertNoAuthority("请在iPhone的\"设置-隐私-相机\"选项中，允许访问您的相机")
             return
         }
         
@@ -119,6 +121,11 @@ extension DDCustomCameraManager {
         controller.circleProgressColor = circleProgressColor
         controller.sessionPreset = sessionPreset
         controller.maxRecordDuration = maxRecordDuration
+        controller.isShowClipperView = isShowClipperView
+        if isShowClipperView == true {
+            controller.isEnableRecordVideo = false
+        }
+        controller.clipperSize = clipperSize
         controller.doneBlock = {[weak self] (image, url) in
            self?.save(image, url: url)
         }
