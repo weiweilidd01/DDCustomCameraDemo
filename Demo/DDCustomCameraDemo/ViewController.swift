@@ -95,8 +95,9 @@ class ViewController: UIViewController {
     @IBAction func takePicAction(_ sender: Any) {
         manager.isEnableTakePhoto = true
         manager.isEnableRecordVideo = true
-        manager.maxRecordDuration = 9
-        //此属性只截取取框内图像。并且不能摄像，只能拍照
+        //录制最长时间
+//        manager.maxRecordDuration = 9
+        //此属性只截取框内图像。并且不能摄像，只能拍照
 //        manager.isShowClipperView = true
         manager.presentCameraController()
         manager.completionBack = {[weak self] (arr) in
