@@ -85,8 +85,8 @@ class DDPhotoPickerCell: UICollectionViewCell {
         contentView.addSubview(durationLab)
         selectCircle.snp.makeConstraints { (make) in
             make.width.height.equalTo(22)
-            make.right.equalTo(self.snp.right).offset(2)
-            make.top.equalTo(self.snp.top).offset(-2)
+            make.right.equalTo(self.snp.right).offset(-3)
+            make.top.equalTo(self.snp.top).offset(3)
         }
         gifLab.snp.makeConstraints { (make) in
             make.left.bottom.equalTo(contentView)

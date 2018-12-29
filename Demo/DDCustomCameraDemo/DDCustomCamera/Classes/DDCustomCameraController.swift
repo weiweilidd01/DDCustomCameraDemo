@@ -163,12 +163,6 @@ class DDCustomCameraController: UIViewController {
         observeDeviceMotion()
         //请求授权
         requsetCameraAuthority()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(willDismiss), name: Notification.Name(rawValue: "KDDCustomCameraWillDismiss"), object: nil)
-    }
-    
-    @objc private func willDismiss() {
-        dismiss(animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -217,7 +211,6 @@ class DDCustomCameraController: UIViewController {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self)
         if session.isRunning == true {
             session.stopRunning()
         }
@@ -381,8 +374,11 @@ extension DDCustomCameraController: DDCustomCameraToolViewDelegate {
         }
         
         if isFromDDPhotoPickerPresent == true {
-            dismiss(animated: false, completion: nil)
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "KDDPotoPickerWillDismiss"), object: nil)
+            var vc: UIViewController? = self
+            while(vc?.presentingViewController != nil) {
+                vc = vc?.presentingViewController
+            }
+            vc?.dismiss(animated: true, completion: nil)
             return
         }
         dismiss(animated: true, completion: nil)

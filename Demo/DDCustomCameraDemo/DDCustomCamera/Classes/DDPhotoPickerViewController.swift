@@ -34,8 +34,11 @@ class DDPhotoPickerViewController: UIViewController {
         }
         
         if self?.isFromDDCustomCameraPresent == true {
-            self?.dismiss(animated: false, completion: nil)
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "KDDCustomCameraWillDismiss"), object: nil)
+            var vc: UIViewController? = self
+            while(vc?.presentingViewController != nil) {
+                vc = vc?.presentingViewController
+            }
+            vc?.dismiss(animated: true, completion: nil)
             return
         }
         
@@ -110,8 +113,6 @@ class DDPhotoPickerViewController: UIViewController {
         
         //监控相册的变化
         PHPhotoLibrary.shared().register(self)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(willDismiss), name: Notification.Name(rawValue: "KDDPotoPickerWillDismiss"), object: nil)
     }
     
     override func viewWillLayoutSubviews() {
@@ -141,10 +142,6 @@ class DDPhotoPickerViewController: UIViewController {
         photoCollectionView.reloadData()
         //更新bottom button状态
         bottomView.didChangeButtonStatus(count: photoPickerSource.selectedPhotosArr.count)
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
 }
 
