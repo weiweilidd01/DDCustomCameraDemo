@@ -71,7 +71,8 @@ public class DDCustomCameraManager: NSObject {
     public var isShowClipperView: Bool = false
     //限制区域的大小
     public var clipperSize: CGSize = CGSize(width: 250, height: 400)
-    
+    //当前对象是否是从DDPhotoPicke present呈现,外界调用请勿修改此参数
+    public var isFromDDPhotoPickerPresent: Bool = false
     public override init() {
         super.init()
     }
@@ -122,6 +123,7 @@ extension DDCustomCameraManager {
         controller.sessionPreset = sessionPreset
         controller.maxRecordDuration = maxRecordDuration
         controller.isShowClipperView = isShowClipperView
+        controller.isFromDDPhotoPickerPresent = isFromDDPhotoPickerPresent
         if isShowClipperView == true {
             controller.isEnableRecordVideo = false
         }

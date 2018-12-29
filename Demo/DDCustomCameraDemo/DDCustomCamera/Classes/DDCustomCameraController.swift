@@ -60,7 +60,8 @@ class DDCustomCameraController: UIViewController {
     public var isShowClipperView: Bool?
     //限制区域的大小
     public var clipperSize: CGSize?
-    
+    //当前对象是否是从DDPhotoPicke present呈现,外界调用请勿修改此参数
+    public var isFromDDPhotoPickerPresent: Bool = false
     //会话
     private lazy var session: AVCaptureSession = {
         let session = AVCaptureSession()
@@ -293,8 +294,12 @@ extension DDCustomCameraController {
 extension DDCustomCameraController: DDCustomCameraToolViewDelegate {
     //点击相册
     func onPhotoAlbum() {
+        if isFromDDPhotoPickerPresent == true {
+            dismiss(animated: true, completion: nil)
+            return
+        }
         pickermanager = DDPhotoPickerManager()
-        pickermanager?.maxSelectedNumber = 9
+        pickermanager?.maxSelectedNumber = 1
         pickermanager?.isFromDDCustomCameraPresent = true
         pickermanager?.presentImagePickerController {[weak self] (arr) in
             self?.selectedAlbumBlock?(arr)

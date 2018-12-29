@@ -9,7 +9,6 @@
 import UIKit
 import Photos
 import SnapKit
-
 private let cellIdentifier = "PhotoCollectionCell"
 
 public enum DDPhotoPickerAssetType: Int {
@@ -75,12 +74,22 @@ class DDPhotoPickerViewController: UIViewController {
     //选择相册类型
     public var photoAssetType:DDPhotoPickerAssetType = .all
     //最大选择数量
-    public var maxSelectedNumber: Int = Int.max
+    public var maxSelectedNumber: Int = 1
     //完成回调
     public var completion: ((_ selectedArr: [DDPhotoGridCellModel]) -> ())?
     //当前对象是否是从DDCustomCamera present呈现
     public var isFromDDCustomCameraPresent: Bool = false
+    //是否支持录制视屏
+    public var isEnableRecordVideo: Bool = true
+    //是否支持拍照
+    public var isEnableTakePhoto: Bool = true
+    //最大录制时长
+    public var maxRecordDuration: Int = 15
+    //是否获取限制区域中的图片
+    public var isShowClipperView: Bool = false
     
+    private let cameraManager = DDCustomCameraManager()
+
     //构造方法
     public init(assetType: DDPhotoPickerAssetType, maxSelectedNumber: Int, completion: @escaping (_ selectedArr: [DDPhotoGridCellModel]?) -> ()) {
         super.init(nibName: nil, bundle: nil)
@@ -169,12 +178,12 @@ extension DDPhotoPickerViewController: UICollectionViewDelegate, UICollectionVie
            dismiss(animated: true, completion: nil)
             return
         }
-        
-//        cameraManager.isEnableTakePhoto = true
-//        cameraManager.isEnableRecordVideo = true
-//        cameraManager.presentCameraController()
-//        cameraManager.completionBack = {(model) in
-//        }
+        cameraManager.isEnableTakePhoto = isEnableTakePhoto
+        cameraManager.isEnableRecordVideo = isEnableRecordVideo
+        cameraManager.maxRecordDuration = maxRecordDuration
+        cameraManager.isShowClipperView = isShowClipperView
+        cameraManager.isFromDDPhotoPickerPresent = true
+        cameraManager.presentCameraController()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -294,9 +303,11 @@ private extension DDPhotoPickerViewController {
         DispatchQueue.main.async {
             //初始化底部栏状态
             self.bottomView.didChangeButtonStatus(count: 0)
-            
             self.photoCollectionView.reloadData()
             //默认滚动到最后
+            if self.photoPickerSource.modelsArr.count == 0 {
+                return
+            }
             let index = self.photoPickerSource.modelsArr.count - 1
             self.photoCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredVertically, animated: false)
         }

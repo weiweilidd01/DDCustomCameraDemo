@@ -17,21 +17,27 @@ public class DDPhotoPickerManager: NSObject {
     //展示时按需获取图片大小
     //若为上传图片，请调用DDPhotoImageManager.requestOriginalImage方法获取
     public var imageSize:CGSize = CGSize.init(width: 140, height: 140)
-
     //选择类型
     public var photoPickerAssetType: DDPhotoPickerAssetType = .all
+    //是否支持录制视屏
+    public var isEnableRecordVideo: Bool = true
+    //是否支持拍照
+    public var isEnableTakePhoto: Bool = true
+    //最大录制时长
+    public var maxRecordDuration: Int = 15
+    //是否获取限制区域中的图片
+    public var isShowClipperView: Bool = false
     
-    //当前对象是否是从DDCustomCamera present呈现
+    //当前对象是否是从DDCustomCamera present呈现,外界禁止调用禁止设置此值
     public var isFromDDCustomCameraPresent: Bool = false
 }
 
 extension DDPhotoPickerManager {
     
-    
     /// 预览选择上传的资源
     ///
     /// - Parameter uploadPhotoSource:  要预览的资源文件
-    public func presentUploadBrowserController(uploadPhotoSource: [PHAsset], seletedIndex: Int) {
+    public func showUploadBrowserController(uploadPhotoSource: [PHAsset], seletedIndex: Int) {
         //遍历创建数据
         let arr = uploadPhotoSource.map({ (asset) -> DDPhotoGridCellModel in
             let type = DDPhotoImageManager.transformAssetType(asset)
@@ -43,7 +49,11 @@ extension DDPhotoPickerManager {
         let vc = DDPhotoUploadBrowserController()
         vc.photoArr = arr
         vc.currentIndex = seletedIndex
-        getAppTopViewController()?.present(vc, animated: true, completion: nil)
+        if getAppTopViewController()?.navigationController == nil {
+            getAppTopViewController()?.present(vc, animated: true, completion: nil)
+            return
+        }
+        getAppTopViewController()?.navigationController?.pushViewController(vc, animated: true)
 
     }
     
@@ -111,7 +121,12 @@ extension DDPhotoPickerManager {
         DDPhotoImageManager.default().removeAllCache()
         let nav = DDPhotoPickerNavigationController(rootViewController: pickerVC)
         nav.previousStatusBarStyle = UIApplication.shared.statusBarStyle
-        pickerVC.isFromDDCustomCameraPresent = isFromDDCustomCameraPresent
+        pickerVC.isFromDDCustomCameraPresent = false
+        pickerVC.isEnableRecordVideo = isEnableRecordVideo
+        pickerVC.isEnableTakePhoto = isEnableTakePhoto
+        pickerVC.maxSelectedNumber = maxSelectedNumber
+        pickerVC.maxRecordDuration = maxRecordDuration
+        pickerVC.isShowClipperView = isShowClipperView
         vc.present(nav, animated: true, completion: nil)
     }
 }

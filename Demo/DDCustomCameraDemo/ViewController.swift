@@ -33,7 +33,6 @@ class ViewController: UIViewController {
             print(subPath)
         }
         DDCustomCameraManager.cleanMoviesFile()
-        
         photoView.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapAction))
         photoView.addGestureRecognizer(tap)
@@ -58,7 +57,7 @@ class ViewController: UIViewController {
         }
         if assetArr.count > 0 {
             let manager = DDPhotoPickerManager()
-            manager.presentUploadBrowserController(uploadPhotoSource: assetArr, seletedIndex: 0)
+            manager.showUploadBrowserController(uploadPhotoSource: assetArr, seletedIndex: 0)
         }
     }
     
@@ -72,14 +71,17 @@ class ViewController: UIViewController {
         guard let arr = assetArr else {
             return
         }
-        manager.presentUploadBrowserController(uploadPhotoSource: arr, seletedIndex: 0)
+        manager.showUploadBrowserController(uploadPhotoSource: arr, seletedIndex: 0)
     }
-    
     
     @IBAction func albumAction(_ sender: Any) {
         let manager = DDPhotoPickerManager()
         manager.maxSelectedNumber = 9
         manager.photoPickerAssetType = .all
+        //若你的第一级入口为选择照片，那个在相册中的进入拍照时，是否允许摄像
+//        manager.isEnableRecordVideo = false
+        //是否需要显示裁剪框
+//        manager.isShowClipperView = true
         manager.presentImagePickerController {[weak self] (resultArr) in
             guard let arr = resultArr else {
                 return
@@ -107,7 +109,7 @@ class ViewController: UIViewController {
         }
     }
     
-    /// 上传视屏时，导出的filePath，图片不需要调用
+    /// 上传视屏压缩时，导出的filePath，图片不需要调用
     ///
     /// - Parameter asset: asset
     func getPath(asset: PHAsset?) {

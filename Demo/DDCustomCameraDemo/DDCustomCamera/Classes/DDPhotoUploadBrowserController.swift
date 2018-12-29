@@ -30,7 +30,11 @@ class DDPhotoUploadBrowserController: UIViewController {
             let value = UIInterfaceOrientation.portrait.rawValue
             UIDevice.current.setValue(value, forKey: "orientation")
         } else {
-            self?.dismiss(animated: true, completion: nil)
+            if self?.navigationController == nil {
+                self?.dismiss(animated: true, completion: nil)
+                return
+            }
+            self?.navigationController?.popViewController(animated: true)
         }
         }, rightBtnCallBack: nil)
     
@@ -59,6 +63,8 @@ class DDPhotoUploadBrowserController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //一定要放在viewWillAppear中，否则会偶尔导致手势失效
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationController?.setNavigationBarHidden(true, animated: animated)
         //初始化导航栏标题
         changeNavigationTitle(currentIndex + 1)
@@ -77,6 +83,7 @@ class DDPhotoUploadBrowserController: UIViewController {
     
     override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
         DDLandscapeManager.shared.isForceLandscape = false
     }
     
@@ -255,5 +262,14 @@ private extension DDPhotoUploadBrowserController {
     func changeNavigationTitle(_ index: Int) {
         let text = "\(index)/\(photoArr?.count ?? 0)"
         navigationView.titleLabel.text = text
+    }
+}
+
+extension DDPhotoUploadBrowserController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if navigationController?.viewControllers.count == 1 {
+            return false
+        }
+        return true
     }
 }
