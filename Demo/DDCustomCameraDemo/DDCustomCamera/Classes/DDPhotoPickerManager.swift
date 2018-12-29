@@ -49,11 +49,11 @@ extension DDPhotoPickerManager {
         let vc = DDPhotoUploadBrowserController()
         vc.photoArr = arr
         vc.currentIndex = seletedIndex
-        if getAppTopViewController()?.navigationController == nil {
-            getAppTopViewController()?.present(vc, animated: true, completion: nil)
+        if getTopViewController?.navigationController == nil {
+            getTopViewController?.present(vc, animated: true, completion: nil)
             return
         }
-        getAppTopViewController()?.navigationController?.pushViewController(vc, animated: true)
+        getTopViewController?.navigationController?.pushViewController(vc, animated: true)
 
     }
     
@@ -85,7 +85,7 @@ extension DDPhotoPickerManager {
             }
             alertVC.addAction(cancelAction)
             alertVC.addAction(actionCommit)
-            getAppTopViewController()?.present(alertVC, animated: true, completion: nil)
+            getTopViewController?.present(alertVC, animated: true, completion: nil)
             return
         case .authorized:
             break
@@ -98,7 +98,7 @@ extension DDPhotoPickerManager {
         }
         
         //已经授权通过,获取当前controller
-        guard let vc = getAppTopViewController() else {
+        guard let vc = getTopViewController else {
             print("未获取presentController")
             return
         }
@@ -132,18 +132,39 @@ extension DDPhotoPickerManager {
 }
 
 private extension DDPhotoPickerManager {
-    func getAppTopViewController() -> (UIViewController?) {
+    
+    var getTopViewController: UIViewController? {
         let rootViewController = UIApplication.shared.keyWindow?.rootViewController
-        if rootViewController?.isKind(of: UITabBarController.self) == true {
-            let tabBarController: UITabBarController = rootViewController as! UITabBarController
-            return tabBarController.selectedViewController
-        } else if rootViewController?.isKind(of: UINavigationController.self) == true {
-            let navigationController: UINavigationController = rootViewController as! UINavigationController
-            return navigationController.visibleViewController
-        } else if let presentVC = rootViewController?.presentedViewController {
-            return presentVC
+        return getTopViewController(viewController: rootViewController)
+    }
+    
+    func getTopViewController(viewController: UIViewController?) -> UIViewController? {
+        
+        if let presentedViewController = viewController?.presentedViewController {
+            return getTopViewController(viewController: presentedViewController)
         }
-        return rootViewController
+        
+        if let tabBarController = viewController as? UITabBarController,
+            let selectViewController = tabBarController.selectedViewController {
+            return getTopViewController(viewController: selectViewController)
+        }
+        
+        if let navigationController = viewController as? UINavigationController,
+            let visibleViewController = navigationController.visibleViewController {
+            return getTopViewController(viewController: visibleViewController)
+        }
+        
+        if let pageViewController = viewController as? UIPageViewController,
+            pageViewController.viewControllers?.count == 1 {
+            return getTopViewController(viewController: pageViewController.viewControllers?.first)
+        }
+        
+        for subView in viewController?.view.subviews ?? [] {
+            if let childViewController = subView.next as? UIViewController {
+                return getTopViewController(viewController: childViewController)
+            }
+        }
+        return viewController
     }
     
     /// 是否有相册访问权限

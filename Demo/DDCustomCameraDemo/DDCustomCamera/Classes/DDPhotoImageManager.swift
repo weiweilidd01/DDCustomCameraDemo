@@ -318,7 +318,7 @@ extension DDPhotoImageManager {
         
         DispatchQueue.global().async {
             //2.从data中读取数据，转换为CGImageSource
-            guard let imageSource = CGImageSourceCreateWithData(photoData as! CFData, nil) else {return}
+            guard let imageSource = CGImageSourceCreateWithData(photoData as CFData, nil) else {return}
             let imageCount = CGImageSourceGetCount(imageSource)
             //3.遍历所有图片
             var images = [UIImage]()
