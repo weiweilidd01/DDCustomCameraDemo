@@ -77,9 +77,9 @@ class ViewController: UIViewController {
     @IBAction func albumAction(_ sender: Any) {
         let manager = DDPhotoPickerManager()
         manager.maxSelectedNumber = 9
-        manager.photoPickerAssetType = .all
+        manager.photoPickerAssetType = .imageOnly
         //若你的第一级入口为选择照片，那个在相册中的进入拍照时，是否允许摄像
-//        manager.isEnableRecordVideo = false
+        manager.isEnableRecordVideo = false
         //是否需要显示裁剪框
 //        manager.isShowClipperView = true
         manager.presentImagePickerController {[weak self] (resultArr) in
@@ -96,7 +96,8 @@ class ViewController: UIViewController {
     
     @IBAction func takePicAction(_ sender: Any) {
         manager.isEnableTakePhoto = true
-        manager.isEnableRecordVideo = true
+        manager.isEnableRecordVideo = false
+        manager.photoAssetType = .imageOnly
         //录制最长时间
 //        manager.maxRecordDuration = 9
         //此属性只截取框内图像。并且不能摄像，只能拍照

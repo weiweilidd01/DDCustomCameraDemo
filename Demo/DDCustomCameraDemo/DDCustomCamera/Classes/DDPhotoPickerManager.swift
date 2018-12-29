@@ -121,7 +121,7 @@ extension DDPhotoPickerManager {
         DDPhotoImageManager.default().removeAllCache()
         let nav = DDPhotoPickerNavigationController(rootViewController: pickerVC)
         nav.previousStatusBarStyle = UIApplication.shared.statusBarStyle
-        pickerVC.isFromDDCustomCameraPresent = false
+        pickerVC.isFromDDCustomCameraPresent = isFromDDCustomCameraPresent
         pickerVC.isEnableRecordVideo = isEnableRecordVideo
         pickerVC.isEnableTakePhoto = isEnableTakePhoto
         pickerVC.maxSelectedNumber = maxSelectedNumber

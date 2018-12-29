@@ -71,6 +71,9 @@ public class DDCustomCameraManager: NSObject {
     public var isShowClipperView: Bool = false
     //限制区域的大小
     public var clipperSize: CGSize = CGSize(width: 250, height: 400)
+    //选择相册类型
+    public var photoAssetType:DDPhotoPickerAssetType = .all
+    
     //当前对象是否是从DDPhotoPicke present呈现,外界调用请勿修改此参数
     public var isFromDDPhotoPickerPresent: Bool = false
     public override init() {
@@ -124,6 +127,7 @@ extension DDCustomCameraManager {
         controller.maxRecordDuration = maxRecordDuration
         controller.isShowClipperView = isShowClipperView
         controller.isFromDDPhotoPickerPresent = isFromDDPhotoPickerPresent
+        controller.photoAssetType = photoAssetType
         if isShowClipperView == true {
             controller.isEnableRecordVideo = false
         }
@@ -133,7 +137,6 @@ extension DDCustomCameraManager {
         }
         //[DDPhotoGridCellModel]?
         controller.selectedAlbumBlock = {[weak self] arr in
-           
             let result = arr?.map({ (model) -> DDCustomCameraResult in
                 let res = model.asset.mediaType == .video ? true : false
                 return DDCustomCameraResult(asset: model.asset, isVideo: res, image: model.image, duration: model.duration, albumArrs: nil)

@@ -30,7 +30,7 @@ public class DDPhotoGridCellModel: NSObject {
     public var type: DDAssetMediaType?
     //asset唯一标识符
     public var localIdentifier: String = ""
-    //缩略图
+    //缩略图 -- 若为视屏，则返回视屏首张图片
     public var image: UIImage?
 
     public var index: Int = 0

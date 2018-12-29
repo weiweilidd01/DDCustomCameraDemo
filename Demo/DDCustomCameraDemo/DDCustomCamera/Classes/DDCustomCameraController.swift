@@ -62,6 +62,8 @@ class DDCustomCameraController: UIViewController {
     public var clipperSize: CGSize?
     //当前对象是否是从DDPhotoPicke present呈现,外界调用请勿修改此参数
     public var isFromDDPhotoPickerPresent: Bool = false
+    //选择相册类型
+    public var photoAssetType: DDPhotoPickerAssetType = .all
     //会话
     private lazy var session: AVCaptureSession = {
         let session = AVCaptureSession()
@@ -161,6 +163,12 @@ class DDCustomCameraController: UIViewController {
         observeDeviceMotion()
         //请求授权
         requsetCameraAuthority()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(willDismiss), name: Notification.Name(rawValue: "KDDCustomCameraWillDismiss"), object: nil)
+    }
+    
+    @objc private func willDismiss() {
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -190,10 +198,6 @@ class DDCustomCameraController: UIViewController {
         }
         layoutOK = true
         
-//        var inset = UIEdgeInsetsMake(0, 0, 0, 0);
-//        if #available(iOS 11.0, *) {
-//            inset = view.safeAreaInsets
-//        }
         toolView.frame = CGRect(x: 0, y: kViewHeight-130-DDSafeAreaBottom, width: kViewWidth, height: 100)
         previewLayer?.frame = view.layer.bounds
         
@@ -213,7 +217,7 @@ class DDCustomCameraController: UIViewController {
     }
 
     deinit {
-        print(self)
+        NotificationCenter.default.removeObserver(self)
         if session.isRunning == true {
             session.stopRunning()
         }
@@ -295,12 +299,14 @@ extension DDCustomCameraController: DDCustomCameraToolViewDelegate {
     //点击相册
     func onPhotoAlbum() {
         if isFromDDPhotoPickerPresent == true {
+            doneBlock?(takedImage, videoUrl)
             dismiss(animated: true, completion: nil)
             return
         }
         pickermanager = DDPhotoPickerManager()
         pickermanager?.maxSelectedNumber = 1
         pickermanager?.isFromDDCustomCameraPresent = true
+        pickermanager?.photoPickerAssetType = photoAssetType
         pickermanager?.presentImagePickerController {[weak self] (arr) in
             self?.selectedAlbumBlock?(arr)
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
@@ -373,7 +379,13 @@ extension DDCustomCameraController: DDCustomCameraToolViewDelegate {
         if let block = doneBlock {
             block(takedImage, videoUrl)
         }
-        self.colseBtnAction()
+        
+        if isFromDDPhotoPickerPresent == true {
+            dismiss(animated: false, completion: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "KDDPotoPickerWillDismiss"), object: nil)
+            return
+        }
+        dismiss(animated: true, completion: nil)
     }
 }
 

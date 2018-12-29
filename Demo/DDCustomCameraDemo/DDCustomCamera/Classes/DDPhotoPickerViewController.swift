@@ -35,6 +35,7 @@ class DDPhotoPickerViewController: UIViewController {
         
         if self?.isFromDDCustomCameraPresent == true {
             self?.dismiss(animated: false, completion: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "KDDCustomCameraWillDismiss"), object: nil)
             return
         }
         
@@ -109,6 +110,8 @@ class DDPhotoPickerViewController: UIViewController {
         
         //监控相册的变化
         PHPhotoLibrary.shared().register(self)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(willDismiss), name: Notification.Name(rawValue: "KDDPotoPickerWillDismiss"), object: nil)
     }
     
     override func viewWillLayoutSubviews() {
@@ -141,7 +144,13 @@ class DDPhotoPickerViewController: UIViewController {
     }
     
     deinit {
-        print(self)
+        NotificationCenter.default.removeObserver(self)
+    }
+}
+
+extension DDPhotoPickerViewController {
+    @objc private func willDismiss() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -184,6 +193,30 @@ extension DDPhotoPickerViewController: UICollectionViewDelegate, UICollectionVie
         cameraManager.isShowClipperView = isShowClipperView
         cameraManager.isFromDDPhotoPickerPresent = true
         cameraManager.presentCameraController()
+        cameraManager.completionBack = {[weak self] (arr) in
+            let result = arr?.map({ (model) -> DDPhotoGridCellModel in
+                guard let asset = model.asset else {
+                    return DDPhotoGridCellModel(asset: PHAsset(), type: .unknown, duration: "")
+                }
+
+                var type:DDAssetMediaType = .unknown
+                switch asset.mediaType {
+                    case .unknown:
+                        type = .unknown
+                    case .image:
+                        type = .image
+                    case .video:
+                        type = .video
+                    default:
+                        type = .unknown
+                }
+                let cellModel = DDPhotoGridCellModel(asset: asset, type: type, duration: model.duration ?? "")
+                cellModel.image = model.image
+                return cellModel
+            })
+            
+            self?.completion?(result ?? [])
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

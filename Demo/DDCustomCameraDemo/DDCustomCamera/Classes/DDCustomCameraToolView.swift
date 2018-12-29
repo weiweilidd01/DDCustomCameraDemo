@@ -145,6 +145,8 @@ class DDCustomCameraToolView: UIView {
                 tap.minimumPressDuration = 0.3
                 tap.delegate = self
                 bottomView.addGestureRecognizer(tap)
+            } else {
+                tipLab.removeFromSuperview()
             }
         }
     }
