@@ -9,7 +9,6 @@
 import UIKit
 import Photos
 
-
 class DDPhotoUploadBrowserController: UIViewController {
 
     /// 默认滚动下标
@@ -69,6 +68,7 @@ class DDPhotoUploadBrowserController: UIViewController {
         //初始化导航栏标题
         changeNavigationTitle(currentIndex + 1)
         DDLandscapeManager.shared.isForceLandscape = true
+        photoCollectionView?.isScrollEnabled = true
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -266,10 +266,13 @@ private extension DDPhotoUploadBrowserController {
 }
 
 extension DDPhotoUploadBrowserController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if navigationController?.viewControllers.count == 1 {
-            return false
-        }
+        photoCollectionView?.isScrollEnabled = false
         return true
     }
 }

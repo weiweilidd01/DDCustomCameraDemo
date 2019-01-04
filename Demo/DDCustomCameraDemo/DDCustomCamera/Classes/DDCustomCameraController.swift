@@ -161,8 +161,7 @@ class DDCustomCameraController: UIViewController {
         setupUI()
         setupCamera()
         observeDeviceMotion()
-        //请求授权
-        requsetCameraAuthority()
+        addNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -720,29 +719,6 @@ private extension DDCustomCameraController {
             }
         }
         return nil
-    }
-    
-    /// 请求相机和麦克风授权
-    func requsetCameraAuthority() {
-        AVCaptureDevice.requestAccess(for: .video) {[weak self] (granted) in
-            if granted == true {
-                if self?.isEnableRecordVideo == true {
-                    AVCaptureDevice.requestAccess(for: .audio, completionHandler: { (ret) in
-                        if ret == false {
-                            self?.onDismiss()
-                            return
-                        }
-                        self?.addNotification()
-                        return
-                    })
-                }
-                self?.addNotification()
-                return
-            } else {
-                self?.onDismiss()
-                return
-            }
-        }
     }
     
     func addNotification() {

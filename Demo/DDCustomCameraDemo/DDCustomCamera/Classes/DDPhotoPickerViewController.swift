@@ -23,7 +23,7 @@ class DDPhotoPickerViewController: UIViewController {
     private lazy var bottomView = DDPhotoPickerBottomView(frame: CGRect.zero, leftBtnCallBack: {[weak self] in
         //预览按钮
         if self?.photoPickerSource.selectedPhotosArr.count == 0 {
-            DDPhotoToast.showToast(msg: "请选择图片预览")
+            DDPhotoToast.showToast(msg: Bundle.localizedString("请选择图片预览"))
             return
         }
         self?.gotoBorwserVC(.preview, index: 0)
@@ -113,6 +113,15 @@ class DDPhotoPickerViewController: UIViewController {
         
         //监控相册的变化
         PHPhotoLibrary.shared().register(self)
+        
+        //添加右滑手势
+        let screenEdgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenHanlePan(pan:)))
+        screenEdgePan.edges = .left
+        view.addGestureRecognizer(screenEdgePan)
+    }
+    
+    @objc func screenHanlePan(pan: UIPanGestureRecognizer) {
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewWillLayoutSubviews() {
@@ -142,12 +151,6 @@ class DDPhotoPickerViewController: UIViewController {
         photoCollectionView.reloadData()
         //更新bottom button状态
         bottomView.didChangeButtonStatus(count: photoPickerSource.selectedPhotosArr.count)
-    }
-}
-
-extension DDPhotoPickerViewController {
-    @objc private func willDismiss() {
-        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -241,7 +244,7 @@ extension DDPhotoPickerViewController: UICollectionViewDelegate, UICollectionVie
                     self?.photoCollectionView.reloadData()
                     return
                 }
-                DDPhotoToast.showToast(msg: "最多只能选择\(maxCount)张图片")
+                DDPhotoToast.showToast(msg: Bundle.localizedString("最多只能选择") + "\(maxCount)" + Bundle.localizedString("张图片"))
                 return
             }
             self?.selectedBtnChangedCellModel(indexPath: index)
@@ -346,13 +349,19 @@ private extension DDPhotoPickerViewController {
     func setLeftBtnItem() {
         let btn = UIButton(type: .custom)
         btn.bounds = CGRect(x: 0, y: 0, width: 30, height: 21)
-        if let path = Bundle(for: DDPhotoPickerViewController.classForCoder()).path(forResource: "DDPhotoPicker", ofType: "bundle"),
-            let bundle = Bundle(path: path),
-            let image = UIImage(named: "photo_nav_icon_back_black", in: bundle, compatibleWith: nil)
-        {
+        if let image = DDPhotoStyleConfig.shared.navigationBackImage {
             btn.setImage(image, for: .normal)
             btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -15, bottom: 0, right: 0)
+        } else {
+            if let path = Bundle(for: DDPhotoPickerViewController.classForCoder()).path(forResource: "DDPhotoPicker", ofType: "bundle"),
+                let bundle = Bundle(path: path),
+                let image = UIImage(named: "photo_nav_icon_back_black", in: bundle, compatibleWith: nil)
+            {
+                btn.setImage(image, for: .normal)
+                btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -15, bottom: 0, right: 0)
+            }
         }
+        
         btn.addTarget(self, action: #selector(leftBtnAction), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: btn)
     }
@@ -363,7 +372,7 @@ private extension DDPhotoPickerViewController {
     
     func setupUI() {
         view.backgroundColor = UIColor.white
-        title = "图片"
+        title = Bundle.localizedString("图片")
         //设置返回按钮
         setLeftBtnItem()
         

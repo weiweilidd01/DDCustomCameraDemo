@@ -22,9 +22,13 @@ class DDPhotoPickerNavigationView: UIView {
     lazy var titleLabel: UILabel = {
        let titleLabel = UILabel(frame: CGRect.zero)
         titleLabel.textAlignment = .center
-        titleLabel.textColor = UIColor.white
+        if let color = DDPhotoStyleConfig.shared.navigationTintColor {
+            titleLabel.textColor = color
+        } else {
+            titleLabel.textColor = UIColor.white
+        }
         titleLabel.font = UIFont.systemFont(ofSize: 18)
-        titleLabel.text = "相册"
+        titleLabel.text = Bundle.localizedString("相册")
         return titleLabel
     }()
     
@@ -41,11 +45,15 @@ class DDPhotoPickerNavigationView: UIView {
         leftBtn.backgroundColor = UIColor.clear
         leftBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         leftBtn.addTarget(self, action: #selector(leftBtnAction(button:)), for: .touchUpInside)
-        if let path = Bundle(for: DDPhotoPickerNavigationView.classForCoder()).path(forResource: "DDPhotoPicker", ofType: "bundle"),
-            let bundle = Bundle(path: path),
-            let image = UIImage(named: "photo_nav_icon_back_black", in: bundle, compatibleWith: nil)
-            {
+        if let image = DDPhotoStyleConfig.shared.navigationBackImage {
             leftBtn.setImage(image, for: .normal)
+        } else {
+            if let path = Bundle(for: DDPhotoPickerNavigationView.classForCoder()).path(forResource: "DDPhotoPicker", ofType: "bundle"),
+                let bundle = Bundle(path: path),
+                let image = UIImage(named: "photo_nav_icon_back_black", in: bundle, compatibleWith: nil)
+            {
+                leftBtn.setImage(image, for: .normal)
+            }
         }
         leftBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
         return leftBtn
@@ -55,7 +63,11 @@ class DDPhotoPickerNavigationView: UIView {
         super.init(frame: frame)
         self.leftBtnCallBack = leftBtnCallBack
         self.rightBtnCallBack = rightBtnCallBack
-        backgroundColor = UIColor.black
+        if let color = DDPhotoStyleConfig.shared.navigationBackgroudColor {
+            backgroundColor = color
+        } else {
+            backgroundColor = UIColor.black
+        }
         addSubview(containerView)
         containerView.addSubview(titleLabel)
         containerView.addSubview(rightBtn)
@@ -106,7 +118,7 @@ extension DDPhotoPickerNavigationView {
         leftBtn.snp.makeConstraints { (make) in
             make.bottom.top.equalTo(containerView).offset(0)
             make.width.equalTo(50)
-            make.left.equalTo(containerView).offset(12)
+            make.left.equalTo(containerView).offset(10)
         }
     }
 }

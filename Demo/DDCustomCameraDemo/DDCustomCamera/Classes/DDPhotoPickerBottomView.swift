@@ -17,7 +17,7 @@ class DDPhotoPickerBottomView: UIView {
         let rightBtn = UIButton(type: .custom)
         rightBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         rightBtn.addTarget(self, action: #selector(rightBtnAction(button:)), for: .touchUpInside)
-        rightBtn.setTitle("完成", for: .normal)
+        rightBtn.setTitle(Bundle.localizedString("完成"), for: .normal)
         rightBtn.backgroundColor = selectNotEnableColor
         rightBtn.layer.cornerRadius = 4.0
         rightBtn.layer.masksToBounds = true
@@ -30,7 +30,7 @@ class DDPhotoPickerBottomView: UIView {
         leftBtn.backgroundColor = UIColor.clear
         leftBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         leftBtn.addTarget(self, action: #selector(leftBtnAction(button:)), for: .touchUpInside)
-        leftBtn.setTitle("预览", for: .normal)
+        leftBtn.setTitle(Bundle.localizedString("预览"), for: .normal)
         return leftBtn
     }()
     
@@ -39,7 +39,16 @@ class DDPhotoPickerBottomView: UIView {
         self.leftBtnCallBack = leftBtnCallBack
         self.rightBtnCallBack = rightBtnCallBack
         //背景颜色
-        backgroundColor = UIColor(red: 25/255.0, green: 25/255.0, blue: 25/255.0, alpha: 1)
+        if let color = DDPhotoStyleConfig.shared.bottomBarBackgroudColor {
+            backgroundColor = color
+        } else {
+            backgroundColor = UIColor(red: 25/255.0, green: 25/255.0, blue: 25/255.0, alpha: 1)
+        }
+        
+        if let color = DDPhotoStyleConfig.shared.bottomBarTintColor {
+            leftBtn.setTitleColor(color, for: .normal)
+        }
+        
         addSubview(rightBtn)
         addSubview(leftBtn)
         rightBtn.snp.makeConstraints { (make) in
@@ -63,12 +72,16 @@ extension DDPhotoPickerBottomView {
     func didChangeButtonStatus(count: Int) {
         if count > 0 {
             rightBtn.isEnabled = true
-            rightBtn.setTitle("完成 (\(count))", for: .normal)
-            rightBtn.backgroundColor = selectEnableColor
+            rightBtn.setTitle(Bundle.localizedString("完成") + "(\(count))", for: .normal)
+            if let color = DDPhotoStyleConfig.shared.bottomBarTintColor {
+                rightBtn.backgroundColor = color
+            } else {
+                rightBtn.backgroundColor = selectEnableColor
+            }
 
         } else {
             rightBtn.isEnabled = false
-            rightBtn.setTitle("完成", for: .normal)
+            rightBtn.setTitle(Bundle.localizedString("完成"), for: .normal)
             rightBtn.backgroundColor = selectNotEnableColor
         }
     }

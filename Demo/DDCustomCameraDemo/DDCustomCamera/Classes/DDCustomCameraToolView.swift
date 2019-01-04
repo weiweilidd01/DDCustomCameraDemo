@@ -39,7 +39,7 @@ class DDCustomCameraToolView: UIView {
     
     private lazy var tipLab: UILabel = {
         let tipLab = UILabel()
-        tipLab.text = "单击拍照，长按拍视频"
+        tipLab.text = Bundle.localizedString("cameraTip")
         tipLab.font = UIFont(name: "PingFangSC-Regular", size: 16)
         tipLab.textAlignment = .center
         tipLab.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -67,7 +67,7 @@ class DDCustomCameraToolView: UIView {
             photoAlbumBtn.setImage(image, for: .normal)
         }
         photoAlbumBtn.addTarget(self, action: #selector(photoAlbumBtnAction), for: .touchUpInside)
-        photoAlbumBtn.setTitle("相册", for: .normal)
+        photoAlbumBtn.setTitle(Bundle.localizedString("相册"), for: .normal)
         photoAlbumBtn.titleLabel?.font = UIFont(name: "PingFangSC-Regular", size: 12)
         return photoAlbumBtn
     }()

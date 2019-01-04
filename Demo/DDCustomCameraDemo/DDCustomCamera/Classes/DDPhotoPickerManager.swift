@@ -8,7 +8,7 @@
 
 import UIKit
 import Photos
-
+import DDKit
 public class DDPhotoPickerManager: NSObject {
     //默认最大可选中数
     public var maxSelectedNumber: Int = 1
@@ -22,7 +22,13 @@ public class DDPhotoPickerManager: NSObject {
     //是否支持录制视屏
     public var isEnableRecordVideo: Bool = true
     //是否支持拍照
-    public var isEnableTakePhoto: Bool = true
+    public var isEnableTakePhoto: Bool = true {
+        didSet {
+            if isEnableRecordVideo == false {
+                photoPickerAssetType = .imageOnly
+            } 
+        }
+    }
     //最大录制时长
     public var maxRecordDuration: Int = 15
     //是否获取限制区域中的图片
@@ -73,25 +79,14 @@ extension DDPhotoPickerManager {
             break
         case .restricted: break
         case .denied:
-            //弹窗提示
-            let alertVC = UIAlertController(title: "提示", message: "请在iPhone的”设置-隐私-照片“选项中，允许app访问您的照片", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "取消", style: .default) { (action) in
-            }
-            let actionCommit = UIAlertAction(title: "去设置", style: .default) { (action) in
-                //去设置
-                if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                    UIApplication.shared.openURL(url)
-                }
-            }
-            alertVC.addAction(cancelAction)
-            alertVC.addAction(actionCommit)
-            getTopViewController?.present(alertVC, animated: true, completion: nil)
+            DDPhotoPickerManager.showAlert(Bundle.localizedString("photoPermission"))
             return
         case .authorized:
             break
         default:
             break
         }
+    
     
         if isHavePhotoLibraryAuthority() == false {
             return
@@ -129,10 +124,35 @@ extension DDPhotoPickerManager {
         pickerVC.isShowClipperView = isShowClipperView
         vc.present(nav, animated: true, completion: nil)
     }
+    
+    static func showAlert(_ content: String) {
+        guard let window = UIApplication.shared.keyWindow else {
+            return
+        }
+        Alert.shared.cancelColor = #colorLiteral(red: 0.3450980392, green: 0.3450980392, blue: 0.3450980392, alpha: 1)
+        Alert.shared.sureColor = #colorLiteral(red: 1, green: 0.2117647059, blue: 0.368627451, alpha: 1)
+        Alert.shared.contentColor = #colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1490196078, alpha: 1)
+        
+        let info = AlertInfo(title: Bundle.localizedString("提示"),
+                             subTitle: nil,
+                             needInput: nil,
+                             cancel: Bundle.localizedString("取消"),
+                             sure: Bundle.localizedString("去设置"),
+                             content: content,
+                             targetView: window)
+        Alert.shared.show(info: info) { (tag) in
+            if tag == 0 {
+                return
+            }
+            //去设置
+            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
 }
 
 private extension DDPhotoPickerManager {
-    
     var getTopViewController: UIViewController? {
         let rootViewController = UIApplication.shared.keyWindow?.rootViewController
         return getTopViewController(viewController: rootViewController)

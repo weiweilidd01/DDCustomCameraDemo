@@ -14,7 +14,7 @@ class DDPhotoPickerTakePicCell: UICollectionViewCell {
     
     private lazy var takePicBtn: UIButton = {
         let takePicBtn = UIButton(type: .custom)
-        takePicBtn.setTitle("拍摄照片", for: .normal)
+        takePicBtn.setTitle(Bundle.localizedString("拍摄照片"), for: .normal)
         takePicBtn.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         takePicBtn.titleLabel?.font = UIFont(name: "PingFangSC-Regular", size: 12)
         if let path = Bundle(for: DDPhotoPickerTakePicCell.classForCoder()).path(forResource: "DDPhotoPicker", ofType: "bundle"),

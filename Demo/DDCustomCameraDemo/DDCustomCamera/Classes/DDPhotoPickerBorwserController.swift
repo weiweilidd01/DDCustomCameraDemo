@@ -61,6 +61,7 @@ class DDPhotoPickerBorwserController: UIViewController {
     }
     
     @objc func deviceOrientationChanged(_ notify: Notification) {
+        isDrag = false
         indexBeforeRotation = currentIndex
     }
     
@@ -70,6 +71,8 @@ class DDPhotoPickerBorwserController: UIViewController {
         //初始化导航栏标题
         changeNavigationTitle(currentIndex + 1)
         DDLandscapeManager.shared.isForceLandscape = true
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        photoCollectionView?.isScrollEnabled = true
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -128,6 +131,17 @@ class DDPhotoPickerBorwserController: UIViewController {
         DDPhotoImageManager.default().removeAllCache()
         NotificationCenter.default.removeObserver(self)
         print(self)
+    }
+}
+
+extension DDPhotoPickerBorwserController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        photoCollectionView?.isScrollEnabled = false
+        return true
     }
 }
 
@@ -298,6 +312,7 @@ private extension DDPhotoPickerBorwserController {
         }
         
         bottomView.leftBtnCallBack = {[weak self] in
+            self?.isDrag = true
             self?.selectedBtnChangedCellModel(index: self?.currentIndex ?? 0)
         }
     }
@@ -316,7 +331,7 @@ private extension DDPhotoPickerBorwserController {
                     changeBottomStatus(index)
                     return
                 }
-                DDPhotoToast.showToast(msg: "最多只能选择\(maxSelectedNumber)张图片")
+                DDPhotoToast.showToast(msg: Bundle.localizedString("最多只能选择") + "\(maxSelectedNumber)" + Bundle.localizedString("张图片"))
                 return
             }
             photoPickerSource?.selectedBtnChangedCellModel(index: index)
@@ -326,6 +341,7 @@ private extension DDPhotoPickerBorwserController {
     }
     
     func changeBottomStatus(_ index: Int) {
+        
         var model:DDPhotoGridCellModel? = photoPickerSource?.modelsArr[index]
         if borwserType == .preview {
             model = photoPickerSource?.previewPhotosArr[index]

@@ -28,18 +28,34 @@ class DDPhotoPickerNavigationController: UINavigationController {
 
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
-        navigationBar.barStyle = .black
+        navigationBar.barStyle = DDPhotoStyleConfig.shared.navigationBarStyle
         navigationBar.isTranslucent = true
-        navigationBar.setBackgroundImage(imageWithColor(barColor), for: .default)
-        navigationBar.tintColor = barTintColor
-        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: barTintColor]
         
-        if let path = Bundle(for: DDPhotoPickerNavigationController.classForCoder()).path(forResource: "DDPhotoPicker", ofType: "bundle"),
-            let bundle = Bundle(path: path),
-            let image = UIImage(named: "photo_nav_icon_back_black", in: bundle, compatibleWith: nil)
-        {
+        if let color = DDPhotoStyleConfig.shared.navigationBackgroudColor {
+            navigationBar.setBackgroundImage(imageWithColor(color), for: .default)
+        } else {
+            navigationBar.setBackgroundImage(imageWithColor(barColor), for: .default)
+        }
+        
+        if let color = DDPhotoStyleConfig.shared.navigationTintColor {
+            navigationBar.tintColor = color
+            navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: color]
+        } else {
+            navigationBar.tintColor = barTintColor
+            navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: barTintColor]
+        }
+        
+        if let image = DDPhotoStyleConfig.shared.navigationBackImage {
             navigationBar.backIndicatorImage = image
             navigationBar.backIndicatorTransitionMaskImage = image
+        } else {
+            if let path = Bundle(for: DDPhotoPickerNavigationController.classForCoder()).path(forResource: "DDPhotoPicker", ofType: "bundle"),
+                let bundle = Bundle(path: path),
+                let image = UIImage(named: "photo_nav_icon_back_black", in: bundle, compatibleWith: nil)
+            {
+                navigationBar.backIndicatorImage = image
+                navigationBar.backIndicatorTransitionMaskImage = image
+            }
         }
     }
     

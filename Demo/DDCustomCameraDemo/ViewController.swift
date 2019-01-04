@@ -40,6 +40,23 @@ class ViewController: UIViewController {
         albumView.isUserInteractionEnabled = true
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(albumImageTapAction))
         albumView.addGestureRecognizer(tap2)
+       
+        
+        // config
+        if let path = Bundle(for: DDPhotoPickerViewController.classForCoder()).path(forResource: "DDPhotoPicker", ofType: "bundle"),
+            let bundle = Bundle(path: path),
+            let image = UIImage(named: "photo_nav_icon_back_black", in: bundle, compatibleWith: nil)
+        {
+          DDPhotoStyleConfig.shared.navigationBackImage = image
+        }
+        
+        DDPhotoStyleConfig.shared.navigationBackgroudColor = UIColor.white
+        DDPhotoStyleConfig.shared.navigationTintColor = UIColor.black
+        DDPhotoStyleConfig.shared.navigationBarStyle = .default
+        
+        DDPhotoStyleConfig.shared.seletedImageCircleColor = UIColor.red
+        DDPhotoStyleConfig.shared.bottomBarBackgroudColor = UIColor.white
+        DDPhotoStyleConfig.shared.bottomBarTintColor = UIColor.red
     }
     
     @objc func tapAction() {
@@ -96,8 +113,7 @@ class ViewController: UIViewController {
     
     @IBAction func takePicAction(_ sender: Any) {
         manager.isEnableTakePhoto = true
-        manager.isEnableRecordVideo = false
-        manager.photoAssetType = .imageOnly
+        manager.isEnableRecordVideo = true
         //录制最长时间
 //        manager.maxRecordDuration = 9
         //此属性只截取框内图像。并且不能摄像，只能拍照

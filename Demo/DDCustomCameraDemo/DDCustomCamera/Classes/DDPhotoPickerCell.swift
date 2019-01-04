@@ -139,8 +139,13 @@ extension DDPhotoPickerCell {
     
     public func changeSelectCircle(_ res: Bool? = false, text: String? = "") {
         if res == true {
-            selectCircle.layer.borderColor = selectedBackBtnColor.cgColor
-            selectCircle.layer.backgroundColor = selectedBackBtnColor.cgColor
+            if let color = DDPhotoStyleConfig.shared.seletedImageCircleColor {
+                selectCircle.layer.borderColor = color.cgColor
+                selectCircle.layer.backgroundColor = color.cgColor
+            } else {
+                selectCircle.layer.borderColor = selectedBackBtnColor.cgColor
+                selectCircle.layer.backgroundColor = selectedBackBtnColor.cgColor
+            }
             selectCircle.text = text
         } else {
             selectCircle.layer.borderColor = UIColor.white.cgColor

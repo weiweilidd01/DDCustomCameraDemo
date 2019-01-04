@@ -32,8 +32,12 @@ class DDPhotoPreviewBottomView: UIView {
     
     private lazy var textLab: UILabel = {
         let textLab = UILabel()
-        textLab.text = "选择"
-        textLab.textColor = UIColor.white
+        textLab.text = Bundle.localizedString("选择")
+        if let color = DDPhotoStyleConfig.shared.bottomBarTintColor {
+            textLab.textColor = color
+        } else {
+            textLab.textColor = UIColor.white
+        }
         textLab.font = UIFont.systemFont(ofSize: 12)
         textLab.isUserInteractionEnabled = true
         return textLab
@@ -43,7 +47,7 @@ class DDPhotoPreviewBottomView: UIView {
         let rightBtn = UIButton(type: .custom)
         rightBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         rightBtn.addTarget(self, action: #selector(rightBtnAction(button:)), for: .touchUpInside)
-        rightBtn.setTitle("完成", for: .normal)
+        rightBtn.setTitle(Bundle.localizedString("完成"), for: .normal)
         rightBtn.backgroundColor = selectNotEnableColor
         rightBtn.layer.cornerRadius = 4.0
         rightBtn.layer.masksToBounds = true
@@ -72,8 +76,13 @@ class DDPhotoPreviewBottomView: UIView {
 extension DDPhotoPreviewBottomView {
     func changeSelectedBtnStatus(_ res: Bool? = false, text: String? = "") {
         if res == true {
-            selectCircle.layer.borderColor = selectedBackBtnColor.cgColor
-            selectCircle.layer.backgroundColor = selectedBackBtnColor.cgColor
+            if let color = DDPhotoStyleConfig.shared.bottomBarTintColor {
+                selectCircle.layer.borderColor = color.cgColor
+                selectCircle.layer.backgroundColor = color.cgColor
+            } else {
+                selectCircle.layer.borderColor = selectedBackBtnColor.cgColor
+                selectCircle.layer.backgroundColor = selectedBackBtnColor.cgColor
+            }
             selectCircle.text = text
         } else {
             selectCircle.layer.borderColor = UIColor.white.cgColor
@@ -86,17 +95,21 @@ extension DDPhotoPreviewBottomView {
         if count > 0 {
             rightBtn.isEnabled = true
             if total > 0 {
-                rightBtn.setTitle("完成 (\(count)/\(total))", for: .normal)
+                rightBtn.setTitle(Bundle.localizedString("完成") + " (\(count)/\(total))", for: .normal)
             } else {
-                rightBtn.setTitle("完成 (\(count))", for: .normal)
+                rightBtn.setTitle(Bundle.localizedString("完成") + " (\(count))", for: .normal)
             }
-            rightBtn.backgroundColor = selectEnableColor
+            if let color = DDPhotoStyleConfig.shared.bottomBarTintColor {
+                rightBtn.backgroundColor = color
+            } else {
+                rightBtn.backgroundColor = selectEnableColor
+            }
         } else {
             rightBtn.isEnabled = false
             if total > 0 {
-                rightBtn.setTitle("完成 (\(count)/\(total))", for: .normal)
+                rightBtn.setTitle(Bundle.localizedString("完成") + " (\(count)/\(total))", for: .normal)
             } else {
-                rightBtn.setTitle("完成 (\(count))", for: .normal)
+                rightBtn.setTitle(Bundle.localizedString("完成") + " (\(count))", for: .normal)
             }
             rightBtn.backgroundColor = selectNotEnableColor
         }
@@ -105,7 +118,11 @@ extension DDPhotoPreviewBottomView {
 
 private extension DDPhotoPreviewBottomView {
     func setupUI() {
-        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
+        if let color = DDPhotoStyleConfig.shared.bottomBarBackgroudColor {
+            backgroundColor = color.withAlphaComponent(0.8)
+        } else {
+            backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
+        }
         addSubview(leftContainer)
         addSubview(rightBtn)
         leftContainer.snp.makeConstraints { (make) in
@@ -151,7 +168,6 @@ private extension DDPhotoPreviewBottomView {
             leftBtnCallBack()
         }
     }
-    
 }
 
 

@@ -54,7 +54,13 @@ public class DDCustomCameraManager: NSObject {
     //thumbnailSize，录制完成回调需要显示的缩略图，只支持拍照不需要设置，默认返回原图
     public var thumbnailSize: CGSize = CGSize(width: 150, height: 150)
     //是否支持录制视屏
-    public var isEnableRecordVideo: Bool = true
+    public var isEnableRecordVideo: Bool = true {
+        didSet {
+            if isEnableRecordVideo == false {
+                photoAssetType = .imageOnly
+            } 
+        }
+    }
     //是否支持拍照
     public var isEnableTakePhoto: Bool = true
     
@@ -86,38 +92,35 @@ public class DDCustomCameraManager: NSObject {
 
 extension DDCustomCameraManager {
     public func presentCameraController() {
-        let authorStatus = PHPhotoLibrary.authorizationStatus()
-        switch authorStatus {
-        case .notDetermined:  //未确定 申请
-            PHPhotoLibrary.requestAuthorization { (status) in
-                //没有授权直接退出
-                if status != .authorized {
-                    return;
+        //先授权相册
+        DDCustomCameraManager.authorizePhoto { (res) in
+            if res == false {
+                DDPhotoPickerManager.showAlert(Bundle.localizedString("photoPermission"))
+                return
+            }
+            //再授权相机
+            DDCustomCameraManager.authorizeCamera {[weak self] (res) in
+                if res == false {
+                    DDPhotoPickerManager.showAlert(Bundle.localizedString("cameraPermission"))
+                    return
+                }
+                //最后授权麦克风
+                if self?.isEnableRecordVideo == true {
+                    DDCustomCameraManager.authorizeMicrophone {[weak self] (res) in
+                        if res == false {
+                            DDPhotoPickerManager.showAlert(Bundle.localizedString("microphonePermission"))
+                            return
+                        }
+                        self?.show()
+                    }
+                } else {
+                    self?.show()
                 }
             }
-            break
-        case .restricted: break
-        case .denied:
-            showAlertNoAuthority("请在iPhone的\"设置-隐私-照片\"选项中，允许访问您的照片")
-            return
-        case .authorized:
-            break
-        default:
-            break
         }
-        
-        if isHavePhotoLibraryAuthority() == false {
-            return
-        }
-        
-        if isHavaMicrophoneAuthority() == false {
-            return
-        }
-        
-        if isHaveCameraAuthority() == false {
-            return
-        }
-        
+    }
+    
+    private func show() {
         let vc = getTopViewController
         let controller = DDCustomCameraController()
         controller.isEnableRecordVideo = isEnableRecordVideo
@@ -133,7 +136,7 @@ extension DDCustomCameraManager {
         }
         controller.clipperSize = clipperSize
         controller.doneBlock = {[weak self] (image, url) in
-           self?.save(image, url: url)
+            self?.save(image, url: url)
         }
         //[DDPhotoGridCellModel]?
         controller.selectedAlbumBlock = {[weak self] arr in
@@ -143,11 +146,9 @@ extension DDCustomCameraManager {
             })
             
             self?.completionBack?(result)
-
         }
         vc?.present(controller, animated: true, completion: nil)
     }
-
 }
 
 extension DDCustomCameraManager {
@@ -160,6 +161,65 @@ extension DDCustomCameraManager {
         let uuidObj = CFUUIDCreate(nil)
         let uuidString = CFUUIDCreateString(nil, uuidObj)
         return (uuidString as String?) ?? "\(Date.init(timeIntervalSinceNow: 100))"
+    }
+    
+    // MARK: - ---获取相册权限
+    static func authorizePhoto(_ comletion:@escaping (Bool) -> Void) {
+        let granted = PHPhotoLibrary.authorizationStatus()
+        switch granted {
+        case PHAuthorizationStatus.authorized:
+            comletion(true)
+        case PHAuthorizationStatus.denied, PHAuthorizationStatus.restricted:
+            comletion(false)
+        case PHAuthorizationStatus.notDetermined:
+            PHPhotoLibrary.requestAuthorization({ (status) in
+                DispatchQueue.main.async {
+                    comletion(status == .authorized ? true:false)
+                }
+            })
+        }
+    }
+    
+    // MARK: - --相机权限
+    static func authorizeCamera(_ comletion: @escaping (Bool) -> Void ) {
+        let granted = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+        switch granted {
+        case AVAuthorizationStatus.authorized:
+            comletion(true)
+        case AVAuthorizationStatus.denied:
+            comletion(false)
+        case AVAuthorizationStatus.restricted:
+            comletion(false)
+        case AVAuthorizationStatus.notDetermined:
+            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) in
+                DispatchQueue.main.async {
+                    if granted {
+                        comletion(granted)
+                    }
+                }
+            })
+        }
+    }
+    
+    // MARK: - --麦克风授权
+    static func authorizeMicrophone(_ comletion: @escaping (Bool) -> Void ) {
+        let granted = AVCaptureDevice.authorizationStatus(for: AVMediaType.audio)
+        switch granted {
+        case AVAuthorizationStatus.authorized:
+            comletion(true)
+        case AVAuthorizationStatus.denied:
+            comletion(false)
+        case AVAuthorizationStatus.restricted:
+            comletion(false)
+        case AVAuthorizationStatus.notDetermined:
+            AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: { (granted: Bool) in
+                DispatchQueue.main.async {
+                    if granted {
+                        comletion(granted)
+                    }
+                }
+            })
+        }
     }
 }
 

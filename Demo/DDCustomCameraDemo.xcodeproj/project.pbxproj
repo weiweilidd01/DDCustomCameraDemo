@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9FDFFE8362E05258CC364EC5 /* Pods_DDCustomCameraDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E3D40FC34E4EF2A0661BAD /* Pods_DDCustomCameraDemo.framework */; };
+		CE97609D21DF414200D572B4 /* Bundle+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE97609C21DF414200D572B4 /* Bundle+Localized.swift */; };
+		CE9760B521DF686100D572B4 /* DDPhotoStyleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9760B421DF686100D572B4 /* DDPhotoStyleConfig.swift */; };
 		CEAC8E8421B65C09002363CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC8E8321B65C09002363CF /* AppDelegate.swift */; };
 		CEAC8E8621B65C09002363CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC8E8521B65C09002363CF /* ViewController.swift */; };
 		CEAC8E8921B65C09002363CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEAC8E8721B65C09002363CF /* Main.storyboard */; };
@@ -67,6 +69,12 @@
 		3221A3A6EC9E27AC91992212 /* Pods-DDCustomCameraDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDCustomCameraDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DDCustomCameraDemo/Pods-DDCustomCameraDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		6C2329C8932518F8C3B30B64 /* Pods-DDCustomCameraDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDCustomCameraDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DDCustomCameraDemo/Pods-DDCustomCameraDemo.release.xcconfig"; sourceTree = "<group>"; };
 		C1E3D40FC34E4EF2A0661BAD /* Pods_DDCustomCameraDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DDCustomCameraDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE97609C21DF414200D572B4 /* Bundle+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Localized.swift"; sourceTree = "<group>"; };
+		CE9760A021DF4A3200D572B4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		CE9760A121DF4A3200D572B4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		CE9760A221DF4A3D00D572B4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		CE9760A321DF4A3D00D572B4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		CE9760B421DF686100D572B4 /* DDPhotoStyleConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDPhotoStyleConfig.swift; sourceTree = "<group>"; };
 		CEAC8E8021B65C09002363CF /* DDCustomCameraDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDCustomCameraDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEAC8E8321B65C09002363CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEAC8E8521B65C09002363CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +162,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CE9760AB21DF4CCE00D572B4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		CEAC8E7721B65C09002363CF = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +197,7 @@
 				CEBBAA8A21D70E9500443825 /* DDCustomCamera */,
 				CEAC8E8321B65C09002363CF /* AppDelegate.swift */,
 				CEAC8E8521B65C09002363CF /* ViewController.swift */,
+				CE9760AB21DF4CCE00D572B4 /* Resources */,
 				CEAC8E8721B65C09002363CF /* Main.storyboard */,
 				CEAC8E8A21B65C0A002363CF /* Assets.xcassets */,
 				CEAC8E8C21B65C0A002363CF /* LaunchScreen.storyboard */,
@@ -247,6 +263,8 @@
 				CEBBAAA421D70E9500443825 /* DDClipperView.swift */,
 				CEBBAAA521D70E9500443825 /* DDPhotoPickerNavigationController.swift */,
 				CEBBAAA621D70E9500443825 /* DDPhotoPickerConfig.swift */,
+				CE97609C21DF414200D572B4 /* Bundle+Localized.swift */,
+				CE9760B421DF686100D572B4 /* DDPhotoStyleConfig.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -348,6 +366,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = CEAC8E7721B65C09002363CF;
 			productRefGroup = CEAC8E8121B65C09002363CF /* Products */;
@@ -422,12 +442,18 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DDCustomCameraDemo/Pods-DDCustomCameraDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DDKit/DDKit.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DDKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,8 +479,10 @@
 				CEBBAAB721D70E9500443825 /* DDPhotoSlider.swift in Sources */,
 				CEBBAAB221D70E9500443825 /* DDPhotoPickerBorwserCell.swift in Sources */,
 				CEBBAAB921D70E9500443825 /* DDCustomCameraPlayer.swift in Sources */,
+				CE97609D21DF414200D572B4 /* Bundle+Localized.swift in Sources */,
 				CEBBAAAE21D70E9500443825 /* DDPhotoPreviewBottomView.swift in Sources */,
 				CEBBAABB21D70E9500443825 /* DDPhotoPickerManager.swift in Sources */,
+				CE9760B521DF686100D572B4 /* DDPhotoStyleConfig.swift in Sources */,
 				CEBBAAB621D70E9500443825 /* DDPhotoPickerBorwserController.swift in Sources */,
 				CEBBAAAC21D70E9500443825 /* DDPhotoImageManager.swift in Sources */,
 				CEBBAAAB21D70E9500443825 /* DDPhotoVideoView.swift in Sources */,
@@ -510,6 +538,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				CEAC8E8821B65C09002363CF /* Base */,
+				CE9760A021DF4A3200D572B4 /* zh-Hans */,
+				CE9760A221DF4A3D00D572B4 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -518,6 +548,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				CEAC8E8D21B65C0A002363CF /* Base */,
+				CE9760A121DF4A3200D572B4 /* zh-Hans */,
+				CE9760A321DF4A3D00D572B4 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -529,6 +561,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -590,6 +623,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
