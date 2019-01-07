@@ -62,11 +62,6 @@ class ViewController: UIViewController {
         //若你的第一级入口为选择照片，那个在相册中的进入拍照时，是否允许摄像
 //        DDPhotoStyleConfig.shared.isEnableRecordVideo = false
         DDPhotoStyleConfig.shared.maxSelectedNumber = 9
-        
-        //Alert配置，主要是针对e肚仔
-        Alert.shared.cancelColor = #colorLiteral(red: 0.3450980392, green: 0.3450980392, blue: 0.3450980392, alpha: 1)
-        Alert.shared.sureColor = #colorLiteral(red: 1, green: 0.2117647059, blue: 0.368627451, alpha: 1)
-        Alert.shared.contentColor = #colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1490196078, alpha: 1)
     }
     
     @objc func tapAction() {
