@@ -73,9 +73,16 @@ class DDPhotoPickerBorwserController: UIViewController {
         DDLandscapeManager.shared.isForceLandscape = true
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         photoCollectionView?.isScrollEnabled = true
+
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
+        if DDPhotoStyleConfig.shared.navigationBarStyle == .default {
+            return .default
+        } else if DDPhotoStyleConfig.shared.navigationBarStyle == .black {
+            return .lightContent
+        }
+        
         return .lightContent
     }
     

@@ -296,9 +296,7 @@ extension DDCustomCameraController: DDCustomCameraToolViewDelegate {
             return
         }
         pickermanager = DDPhotoPickerManager()
-        pickermanager?.maxSelectedNumber = 1
         pickermanager?.isFromDDCustomCameraPresent = true
-        pickermanager?.photoPickerAssetType = photoAssetType
         pickermanager?.presentImagePickerController {[weak self] (arr) in
             self?.selectedAlbumBlock?(arr)
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {

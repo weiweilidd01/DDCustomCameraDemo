@@ -8,7 +8,7 @@
 
 import UIKit
 import Photos
-
+import DDKit
 class ViewController: UIViewController {
     var  manager = DDCustomCameraManager()
 
@@ -40,27 +40,36 @@ class ViewController: UIViewController {
         albumView.isUserInteractionEnabled = true
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(albumImageTapAction))
         albumView.addGestureRecognizer(tap2)
-       
         
-        // config
-        if let path = Bundle(for: DDPhotoPickerViewController.classForCoder()).path(forResource: "DDPhotoPicker", ofType: "bundle"),
-            let bundle = Bundle(path: path),
-            let image = UIImage(named: "photo_nav_icon_back_black", in: bundle, compatibleWith: nil)
-        {
-          DDPhotoStyleConfig.shared.navigationBackImage = image
-        }
+    
+        // DDPhotoStyleConfig初始化实际项目中，可丢到AppDelegate中初始化
+        //UI方面的配置主要是针对e肚仔
+//        if let path = Bundle(for: DDPhotoPickerViewController.classForCoder()).path(forResource: "DDPhotoPicker", ofType: "bundle"),
+//            let bundle = Bundle(path: path),
+//            let image = UIImage(named: "photo_nav_icon_back_black", in: bundle, compatibleWith: nil)
+//        {
+//          DDPhotoStyleConfig.shared.navigationBackImage = image
+//        }
+//        DDPhotoStyleConfig.shared.navigationBackgroudColor = UIColor.white
+//        DDPhotoStyleConfig.shared.navigationTintColor = UIColor.black
+//        DDPhotoStyleConfig.shared.navigationBarStyle = .default
+//
+//        DDPhotoStyleConfig.shared.seletedImageCircleColor = UIColor.red
+//        DDPhotoStyleConfig.shared.bottomBarBackgroudColor = UIColor.white
+//        DDPhotoStyleConfig.shared.bottomBarTintColor = UIColor.red
         
-        DDPhotoStyleConfig.shared.navigationBackgroudColor = UIColor.white
-        DDPhotoStyleConfig.shared.navigationTintColor = UIColor.black
-        DDPhotoStyleConfig.shared.navigationBarStyle = .default
+        DDPhotoStyleConfig.shared.photoAssetType = .imageOnly
+        //若你的第一级入口为选择照片，那个在相册中的进入拍照时，是否允许摄像
+//        DDPhotoStyleConfig.shared.isEnableRecordVideo = false
+        DDPhotoStyleConfig.shared.maxSelectedNumber = 9
         
-        DDPhotoStyleConfig.shared.seletedImageCircleColor = UIColor.red
-        DDPhotoStyleConfig.shared.bottomBarBackgroudColor = UIColor.white
-        DDPhotoStyleConfig.shared.bottomBarTintColor = UIColor.red
+        //Alert配置，主要是针对e肚仔
+        Alert.shared.cancelColor = #colorLiteral(red: 0.3450980392, green: 0.3450980392, blue: 0.3450980392, alpha: 1)
+        Alert.shared.sureColor = #colorLiteral(red: 1, green: 0.2117647059, blue: 0.368627451, alpha: 1)
+        Alert.shared.contentColor = #colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1490196078, alpha: 1)
     }
     
     @objc func tapAction() {
-
         guard let arr = takePhotoArr else {
             return
         }
@@ -73,8 +82,7 @@ class ViewController: UIViewController {
         
         }
         if assetArr.count > 0 {
-            let manager = DDPhotoPickerManager()
-            manager.showUploadBrowserController(uploadPhotoSource: assetArr, seletedIndex: 0)
+            DDPhotoPickerManager.showUploadBrowserController(uploadPhotoSource: assetArr, seletedIndex: 0)
         }
     }
     
@@ -83,46 +91,28 @@ class ViewController: UIViewController {
         let assetArr = albumArr?.map({ (cellModel) -> PHAsset in
             return cellModel.asset
         })
-        let manager = DDPhotoPickerManager()
-        
         guard let arr = assetArr else {
             return
         }
-        manager.showUploadBrowserController(uploadPhotoSource: arr, seletedIndex: 0)
+        DDPhotoPickerManager.showUploadBrowserController(uploadPhotoSource: arr, seletedIndex: 0)
     }
     
     @IBAction func albumAction(_ sender: Any) {
-        let manager = DDPhotoPickerManager()
-        manager.maxSelectedNumber = 9
-        manager.photoPickerAssetType = .imageOnly
-        //若你的第一级入口为选择照片，那个在相册中的进入拍照时，是否允许摄像
-        manager.isEnableRecordVideo = false
-        //是否需要显示裁剪框
-//        manager.isShowClipperView = true
-        manager.presentImagePickerController {[weak self] (resultArr) in
+        DDPhotoPickerManager.show {[weak self] (resultArr) in
             guard let arr = resultArr else {
                 return
             }
             let model = resultArr?.first
-            _ = DDCustomCameraManager.requestImageForAsset(for: model?.asset, targetSize: CGSize(width: 150, height: 150), resultHandler: { (image, dic) in
-                self?.albumView.image = image
-            })
+            self?.albumView.image = model?.image
             self?.albumArr = arr
         }
     }
     
     @IBAction func takePicAction(_ sender: Any) {
-        manager.isEnableTakePhoto = true
-        manager.isEnableRecordVideo = true
-        //录制最长时间
-//        manager.maxRecordDuration = 9
-        //此属性只截取框内图像。并且不能摄像，只能拍照
-//        manager.isShowClipperView = true
-        manager.presentCameraController()
-        manager.completionBack = {[weak self] (arr) in
-            self?.photoView.image = arr?.first?.image
-            self?.getPath(asset: arr?.first?.asset)
-            self?.takePhotoArr = arr
+        DDCustomCameraManager.show { (arr) in
+            self.photoView.image = arr?.first?.image
+            self.getPath(asset: arr?.first?.asset)
+            self.takePhotoArr = arr
         }
     }
     
@@ -134,7 +124,6 @@ class ViewController: UIViewController {
         if asset?.mediaType != .video {
             return
         }
-        
         //presetName 参数主要使用一下三个
         //AVAssetExportPresetLowQuality
         //AVAssetExportPresetMediumQuality
@@ -143,7 +132,6 @@ class ViewController: UIViewController {
             //path默认存储在沙盒的tmp目录下
             print(path)
         }
-        
         //清除存储在tmp目录下的文件。需要就调用
         DDCustomCameraManager.cleanMoviesFile()
     }

@@ -118,6 +118,8 @@ class DDPhotoPickerViewController: UIViewController {
         let screenEdgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenHanlePan(pan:)))
         screenEdgePan.edges = .left
         view.addGestureRecognizer(screenEdgePan)
+        
+//        navigationController?.navigationBar.barStyle = .black
     }
     
     @objc func screenHanlePan(pan: UIPanGestureRecognizer) {
@@ -187,10 +189,6 @@ extension DDPhotoPickerViewController: UICollectionViewDelegate, UICollectionVie
            dismiss(animated: true, completion: nil)
             return
         }
-        cameraManager.isEnableTakePhoto = isEnableTakePhoto
-        cameraManager.isEnableRecordVideo = isEnableRecordVideo
-        cameraManager.maxRecordDuration = maxRecordDuration
-        cameraManager.isShowClipperView = isShowClipperView
         cameraManager.isFromDDPhotoPickerPresent = true
         cameraManager.presentCameraController()
         cameraManager.completionBack = {[weak self] (arr) in

@@ -47,46 +47,19 @@ public enum DDWatermarkLocation:Int {
 }
 
 public class DDCustomCameraManager: NSObject {
-
     ///完成回调
-    public var completionBack: (([DDCustomCameraResult]?)->())?
-    
-    //thumbnailSize，录制完成回调需要显示的缩略图，只支持拍照不需要设置，默认返回原图
-    public var thumbnailSize: CGSize = CGSize(width: 150, height: 150)
-    //是否支持录制视屏
-    public var isEnableRecordVideo: Bool = true {
-        didSet {
-            if isEnableRecordVideo == false {
-                photoAssetType = .imageOnly
-            } 
-        }
-    }
-    //是否支持拍照
-    public var isEnableTakePhoto: Bool = true
-    
-    //最大录制时长
-    public var maxRecordDuration: Int = 15
-    
-    //长按拍摄动画进度条颜色
-    public var circleProgressColor: UIColor = UIColor(red: 99.0/255.0, green: 181.0/255.0, blue: 244.0/255.0, alpha: 1)
-    
-    //选择尺寸
-    public var sessionPreset: DDCaptureSessionPreset = .preset1280x720
-    
-    //是否获取限制区域中的图片
-    public var isShowClipperView: Bool = false
-    //限制区域的大小
-    public var clipperSize: CGSize = CGSize(width: 250, height: 400)
-    //选择相册类型
-    public var photoAssetType:DDPhotoPickerAssetType = .all
+    var completionBack: (([DDCustomCameraResult]?)->())?
     
     //当前对象是否是从DDPhotoPicke present呈现,外界调用请勿修改此参数
-    public var isFromDDPhotoPickerPresent: Bool = false
-    public override init() {
-        super.init()
-    }
-    
-    deinit {
+    var isFromDDPhotoPickerPresent: Bool = false
+}
+
+// MARK: - 类方法入口
+extension DDCustomCameraManager {
+    public static func show(finishedHandler:@escaping ([DDCustomCameraResult]?)->()) {
+        let manager = DDCustomCameraManager()
+        manager.completionBack = finishedHandler
+        manager.presentCameraController()
     }
 }
 
@@ -105,38 +78,39 @@ extension DDCustomCameraManager {
                     return
                 }
                 //最后授权麦克风
-                if self?.isEnableRecordVideo == true {
+                if DDPhotoStyleConfig.shared.isEnableRecordVideo == true {
                     DDCustomCameraManager.authorizeMicrophone {[weak self] (res) in
                         if res == false {
                             DDPhotoPickerManager.showAlert(Bundle.localizedString("microphonePermission"))
                             return
                         }
-                        self?.show()
+                        self?.showCamera()
                     }
                 } else {
-                    self?.show()
+                    self?.showCamera()
                 }
             }
         }
     }
     
-    private func show() {
+    private func showCamera() {
         let vc = getTopViewController
         let controller = DDCustomCameraController()
-        controller.isEnableRecordVideo = isEnableRecordVideo
-        controller.isEnableTakePhoto = isEnableTakePhoto
-        controller.circleProgressColor = circleProgressColor
-        controller.sessionPreset = sessionPreset
-        controller.maxRecordDuration = maxRecordDuration
-        controller.isShowClipperView = isShowClipperView
+        controller.isEnableRecordVideo = DDPhotoStyleConfig.shared.isEnableRecordVideo
+        controller.isEnableTakePhoto = DDPhotoStyleConfig.shared.isEnableTakePhoto
+        controller.circleProgressColor = DDPhotoStyleConfig.shared.circleProgressColor
+        controller.sessionPreset = DDPhotoStyleConfig.shared.sessionPreset
+        controller.maxRecordDuration = DDPhotoStyleConfig.shared.maxRecordDuration
+        controller.isShowClipperView = DDPhotoStyleConfig.shared.isShowClipperView
         controller.isFromDDPhotoPickerPresent = isFromDDPhotoPickerPresent
-        controller.photoAssetType = photoAssetType
-        if isShowClipperView == true {
+        controller.photoAssetType = DDPhotoStyleConfig.shared.photoAssetType
+        if DDPhotoStyleConfig.shared.isShowClipperView == true {
             controller.isEnableRecordVideo = false
         }
-        controller.clipperSize = clipperSize
-        controller.doneBlock = {[weak self] (image, url) in
-            self?.save(image, url: url)
+        controller.clipperSize = DDPhotoStyleConfig.shared.clipperSize
+        //为何不使用[weak self]，防止当前对象运行完没释放，两者之间无循环引用，不互相持有
+        controller.doneBlock = {(image, url) in
+            self.save(image, url: url)
         }
         //[DDPhotoGridCellModel]?
         controller.selectedAlbumBlock = {[weak self] arr in
@@ -252,7 +226,7 @@ private extension DDCustomCameraManager {
             saveVideoToAlbum(url) {[weak self] (success, asset) in
                 if success == true {
                     //视屏就获取首张图片
-                   _ = DDCustomCameraManager.requestImageForAsset(for: asset, targetSize: self?.thumbnailSize ?? CGSize(width: 150, height: 150), resultHandler: { (image, dic) in
+                   _ = DDCustomCameraManager.requestImageForAsset(for: asset, targetSize: DDPhotoStyleConfig.shared.thumbnailSize, resultHandler: { (image, dic) in
                         DispatchQueue.main.async(execute: {
                             if let back = self?.completionBack {
                                 let model = DDCustomCameraResult.init(asset: asset, isVideo: true, image: image, duration: self?.getDuration(asset))
@@ -268,7 +242,6 @@ private extension DDCustomCameraManager {
         }
     
     }
-    
     
     /// 获取视屏时长
     ///

@@ -10,40 +10,34 @@ import UIKit
 import Photos
 import DDKit
 public class DDPhotoPickerManager: NSObject {
-    //默认最大可选中数
-    public var maxSelectedNumber: Int = 1
-    //选择图片的size大小，为需要展示的缩略图大小。
-    //若默认返回原图，大图片会导致内存问题
-    //展示时按需获取图片大小
-    //若为上传图片，请调用DDPhotoImageManager.requestOriginalImage方法获取
-    public var imageSize:CGSize = CGSize.init(width: 140, height: 140)
-    //选择类型
-    public var photoPickerAssetType: DDPhotoPickerAssetType = .all
-    //是否支持录制视屏
-    public var isEnableRecordVideo: Bool = true
-    //是否支持拍照
-    public var isEnableTakePhoto: Bool = true {
-        didSet {
-            if isEnableRecordVideo == false {
-                photoPickerAssetType = .imageOnly
-            } 
-        }
-    }
-    //最大录制时长
-    public var maxRecordDuration: Int = 15
-    //是否获取限制区域中的图片
-    public var isShowClipperView: Bool = false
-    
     //当前对象是否是从DDCustomCamera present呈现,外界禁止调用禁止设置此值
-    public var isFromDDCustomCameraPresent: Bool = false
+    var isFromDDCustomCameraPresent: Bool = false
 }
 
+// MARK: - 类方法调用
 extension DDPhotoPickerManager {
+    //入口
+    public static func show(finishedHandler:@escaping ([DDPhotoGridCellModel]?)->()) {
+        let manager = DDPhotoPickerManager()
+        manager.presentImagePickerController(finishedHandler: finishedHandler)
+    }
     
     /// 预览选择上传的资源
     ///
     /// - Parameter uploadPhotoSource:  要预览的资源文件
-    public func showUploadBrowserController(uploadPhotoSource: [PHAsset], seletedIndex: Int) {
+    public static func showUploadBrowserController(uploadPhotoSource: [PHAsset], seletedIndex: Int) {
+        let manager = DDPhotoPickerManager()
+        manager.showUploadBrowser(uploadPhotoSource: uploadPhotoSource, seletedIndex: seletedIndex)
+    }
+}
+
+
+// MARK: - 私有方法
+extension DDPhotoPickerManager {
+    /// 预览选择上传的资源
+    ///
+    /// - Parameter uploadPhotoSource:  要预览的资源文件
+   public func showUploadBrowser(uploadPhotoSource: [PHAsset], seletedIndex: Int) {
         //遍历创建数据
         let arr = uploadPhotoSource.map({ (asset) -> DDPhotoGridCellModel in
             let type = DDPhotoImageManager.transformAssetType(asset)
@@ -60,7 +54,6 @@ extension DDPhotoPickerManager {
             return
         }
         getTopViewController?.navigationController?.pushViewController(vc, animated: true)
-
     }
     
    /// 显示图片选择控制器
@@ -99,7 +92,7 @@ extension DDPhotoPickerManager {
         }
         
         //present picker controller
-        let pickerVC = DDPhotoPickerViewController(assetType: photoPickerAssetType, maxSelectedNumber: maxSelectedNumber) {(selectedArr) in
+        let pickerVC = DDPhotoPickerViewController(assetType: DDPhotoStyleConfig.shared.photoAssetType, maxSelectedNumber:  DDPhotoStyleConfig.shared.maxSelectedNumber) {(selectedArr) in
             guard let arr = selectedArr else {
                 finishedHandler(nil)
                 return
@@ -117,11 +110,11 @@ extension DDPhotoPickerManager {
         let nav = DDPhotoPickerNavigationController(rootViewController: pickerVC)
         nav.previousStatusBarStyle = UIApplication.shared.statusBarStyle
         pickerVC.isFromDDCustomCameraPresent = isFromDDCustomCameraPresent
-        pickerVC.isEnableRecordVideo = isEnableRecordVideo
-        pickerVC.isEnableTakePhoto = isEnableTakePhoto
-        pickerVC.maxSelectedNumber = maxSelectedNumber
-        pickerVC.maxRecordDuration = maxRecordDuration
-        pickerVC.isShowClipperView = isShowClipperView
+        pickerVC.isEnableRecordVideo = DDPhotoStyleConfig.shared.isEnableRecordVideo
+        pickerVC.isEnableTakePhoto = DDPhotoStyleConfig.shared.isEnableTakePhoto
+        pickerVC.maxSelectedNumber = DDPhotoStyleConfig.shared.maxSelectedNumber
+        pickerVC.maxRecordDuration = DDPhotoStyleConfig.shared.maxRecordDuration
+        pickerVC.isShowClipperView = DDPhotoStyleConfig.shared.isShowClipperView
         vc.present(nav, animated: true, completion: nil)
     }
     
@@ -129,10 +122,6 @@ extension DDPhotoPickerManager {
         guard let window = UIApplication.shared.keyWindow else {
             return
         }
-        Alert.shared.cancelColor = #colorLiteral(red: 0.3450980392, green: 0.3450980392, blue: 0.3450980392, alpha: 1)
-        Alert.shared.sureColor = #colorLiteral(red: 1, green: 0.2117647059, blue: 0.368627451, alpha: 1)
-        Alert.shared.contentColor = #colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1490196078, alpha: 1)
-        
         let info = AlertInfo(title: Bundle.localizedString("提示"),
                              subTitle: nil,
                              needInput: nil,
