@@ -1,26 +1,62 @@
 # DDCustomCamera
 
-#### 1.基本使用
+[demo地址](https://github.com/weiweilidd01/DDCustomCameraDemo)
 
+####  DDCustomCamera和DDPhotoPicker合成一个组件DDCustomCamera
+
+
+#### 1.前期初始化
+1.请在info.plist中添加相册，照片，麦克风授权权限
+
+2.DDPhotoStyleConfig配置对象，为单列
+基本使用样例
 ```
-        let manager = DDCustomCameraManager()
-         //是否允许拍照
-        manager.isEnableTakePhoto = true
-        //是否允许摄像
-        manager.isEnableRecordVideo = true
-          //录制最长时间
-//        manager.maxRecordDuration = 9
-        //此属性只截取取框内图像。并且不能摄像，只能拍照
-//        manager.isShowClipperView = true
-        manager.presentCameraController()
-        //完成回调
-        manager.completionBack = {[weak self] (model) in
-            print(model.debugDescription)
-            self?.getPath(asset: model?.asset)
-        }
+//      DDPhotoStyleConfig UI配置针对于e肚仔项目，其他项目无特殊需求不必关心
+//      DDPhotoStyleConfig初始化实际项目中，可丢到AppDelegate中初始化
+//        if let path = Bundle(for: DDPhotoPickerViewController.classForCoder()).path(forResource: "DDPhotoPicker", ofType: "bundle"),
+//            let bundle = Bundle(path: path),
+//            let image = UIImage(named: "photo_nav_icon_back_black", in: bundle, compatibleWith: nil)
+//        {
+//          DDPhotoStyleConfig.shared.navigationBackImage = image
+//        }
+//        DDPhotoStyleConfig.shared.navigationBackgroudColor = UIColor.white
+//        DDPhotoStyleConfig.shared.navigationTintColor = UIColor.black
+//        DDPhotoStyleConfig.shared.navigationBarStyle = .default
+//
+//        DDPhotoStyleConfig.shared.seletedImageCircleColor = UIColor.red
+//        DDPhotoStyleConfig.shared.bottomBarBackgroudColor = UIColor.white
+//        DDPhotoStyleConfig.shared.bottomBarTintColor = UIColor.red
+        
+        DDPhotoStyleConfig.shared.photoAssetType = .imageOnly
+        //若你的第一级入口为选择照片，那个在相册中的进入拍照时，是否允许摄像
+        DDPhotoStyleConfig.shared.isEnableRecordVideo = false
+        DDPhotoStyleConfig.shared.maxSelectedNumber = 9
 ```
 
-#### 2.完成回调model介绍 -- DDCustomCameraResult
+#### 2.基本调用
+1.相册调用
+```
+   DDPhotoPickerManager.show {[weak self] (resultArr) in
+   }
+```
+2.拍照调用
+```
+  DDCustomCameraManager.show { (resultArr) in
+  }
+```
+
+#### 2.相册返回数组模型 DDPhotoGridCellModel
+```
+    //资源对象
+    public var asset: PHAsset
+    //缩略图 -- 若为视屏，则返回视屏首张图片
+    public var image: UIImage?
+    //视屏时长
+    public var duration: String = ""
+    //当前资源类型
+    public var type: DDAssetMediaType?
+```
+#### 3.拍照完成回调DDCustomCameraResult
 
 ```
     //资源对象
@@ -32,7 +68,7 @@
     public var duration: String?
 ```
 
-#### 3.若要上传视屏，获取对应的filePath
+#### 4.若要上传视屏，获取对应的filePath
 
 ```
     /// 上传视屏时，导出的filePath，图片不需要调用
@@ -58,7 +94,7 @@
     }
 ```
 
-#### 4.DDCustomCameraManager另外还提供了以下操作asset方法
+#### 5.DDCustomCameraManager和DDPhotoImageManager提供操作asset方法，两者方法大体类似，都能调用
 
 ```
     /// 获取图片
@@ -112,4 +148,4 @@
     static public func exportVideoFilePath(for asset: PHAsset?, type: DDExportVideoType, presetName: String, compelete:((String?, NSError?)->())?)
 ```
 
-#### 5.具体使用，请参照DDKitDemo
+#### 5.具体使用，请参照[demo地址](https://github.com/weiweilidd01/DDCustomCameraDemo)
