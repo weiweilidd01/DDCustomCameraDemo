@@ -194,7 +194,7 @@
 		CEAC8E8221B65C09002363CF /* DDCustomCameraDemo */ = {
 			isa = PBXGroup;
 			children = (
-				CEBBAA8A21D70E9500443825 /* DDCustomCamera */,
+				CEBBAA8A21D70E9500443825 /* CustomCamera */,
 				CEAC8E8321B65C09002363CF /* AppDelegate.swift */,
 				CEAC8E8521B65C09002363CF /* ViewController.swift */,
 				CE9760AB21DF4CCE00D572B4 /* Resources */,
@@ -224,13 +224,13 @@
 			path = DDCustomCameraDemoUITests;
 			sourceTree = "<group>";
 		};
-		CEBBAA8A21D70E9500443825 /* DDCustomCamera */ = {
+		CEBBAA8A21D70E9500443825 /* CustomCamera */ = {
 			isa = PBXGroup;
 			children = (
 				CEBBAA8B21D70E9500443825 /* Classes */,
 				CEBBAAA721D70E9500443825 /* Assets */,
 			);
-			path = DDCustomCamera;
+			path = CustomCamera;
 			sourceTree = "<group>";
 		};
 		CEBBAA8B21D70E9500443825 /* Classes */ = {

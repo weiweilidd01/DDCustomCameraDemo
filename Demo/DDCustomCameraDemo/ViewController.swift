@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(albumImageTapAction))
         albumView.addGestureRecognizer(tap2)
         
-    
+            
         // DDPhotoStyleConfig初始化实际项目中，可丢到AppDelegate中初始化
         //UI方面的配置主要是针对e肚仔
 //        if let path = Bundle(for: DDPhotoPickerViewController.classForCoder()).path(forResource: "DDPhotoPicker", ofType: "bundle"),
@@ -58,7 +58,9 @@ class ViewController: UIViewController {
 //        DDPhotoStyleConfig.shared.bottomBarBackgroudColor = UIColor.white
 //        DDPhotoStyleConfig.shared.bottomBarTintColor = UIColor.red
         
-        DDPhotoStyleConfig.shared.photoAssetType = .imageOnly
+        
+        
+//        DDPhotoStyleConfig.shared.photoAssetType = .imageOnly
         //若你的第一级入口为选择照片，那个在相册中的进入拍照时，是否允许摄像
 //        DDPhotoStyleConfig.shared.isEnableRecordVideo = false
         DDPhotoStyleConfig.shared.maxSelectedNumber = 9
