@@ -164,7 +164,6 @@ extension DDPhotoPickerBorwserCell {
 
         videoView.model = model
     
-    
         videoView.hiddenPreviewCallBack = {[weak self] (isPlay) in
             //除了第一次加载显示一下封面，后续一直隐藏
             self?.photoImageView.isHidden = true

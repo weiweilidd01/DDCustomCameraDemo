@@ -106,7 +106,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func takePicAction(_ sender: Any) {
+        //请勿使用weak ，否则会被释放，获取不到回调
         DDCustomCameraManager.show { (arr) in
+
             self.photoView.image = arr?.first?.image
             self.getPath(asset: arr?.first?.asset)
             self.takePhotoArr = arr

@@ -31,7 +31,6 @@ extension DDPhotoPickerManager {
     }
 }
 
-
 // MARK: - 私有方法
 extension DDPhotoPickerManager {
     /// 预览选择上传的资源
@@ -60,27 +59,20 @@ extension DDPhotoPickerManager {
    ///
    /// - Parameter finishedHandler: 完成回调
    public func presentImagePickerController(finishedHandler:@escaping ([DDPhotoGridCellModel]?)->()) {
-        let authorStatus = PHPhotoLibrary.authorizationStatus()
-        switch authorStatus {
-        case .notDetermined:  //未确定 申请
-            PHPhotoLibrary.requestAuthorization { (status) in
-                //没有授权直接退出
-                if status != .authorized {
-                    return;
-                }
+
+        DDCustomCameraManager.authorizePhoto { (res) in
+            if res == false {
+                DDPhotoPickerManager.showAlert(DDPhotoStyleConfig.shared.photoPermission)
+                return
             }
-            break
-        case .restricted: break
-        case .denied:
-            DDPhotoPickerManager.showAlert(Bundle.localizedString("photoPermission"))
-            return
-        case .authorized:
-            break
-        default:
-            break
+            //类方法不会循环引用，不能设为weak，否则self为空
+            self.presentVC(finishedHandler: finishedHandler)
         }
     
     
+    }
+    
+    private func presentVC(finishedHandler:@escaping ([DDPhotoGridCellModel]?)->()) {
         if isHavePhotoLibraryAuthority() == false {
             return
         }
@@ -98,7 +90,7 @@ extension DDPhotoPickerManager {
                 return
             }
             for cellModel in arr {
-               _ = DDPhotoImageManager.default().requestTargetImage(for: cellModel.asset, targetSize: CGSize(width: 150, height: 150), resultHandler: { (image, dic) in
+                _ = DDPhotoImageManager.default().requestTargetImage(for: cellModel.asset, targetSize: CGSize(width: 150, height: 150), resultHandler: { (image, dic) in
                     cellModel.image = image
                 })
             }
@@ -119,23 +111,40 @@ extension DDPhotoPickerManager {
     }
     
     static func showAlert(_ content: String) {
-        guard let window = UIApplication.shared.keyWindow else {
-            return
-        }
-        let info = AlertInfo(title: Bundle.localizedString("提示"),
-                             subTitle: nil,
-                             needInput: nil,
-                             cancel: Bundle.localizedString("取消"),
-                             sure: Bundle.localizedString("去设置"),
-                             content: content,
-                             targetView: window)
-        Alert.shared.show(info: info) { (tag) in
-            if tag == 0 {
+        if DDPhotoStyleConfig.shared.isEnableDDKitHud == false {
+            //弹窗提示
+            let alertVC = UIAlertController(title: "温馨提示", message: content, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "取消", style: .default) { (action) in
+            }
+            let actionCommit = UIAlertAction(title: "去设置", style: .default) { (action) in
+                //去设置
+                if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                    UIApplication.shared.openURL(url)
+                }
+            }
+            alertVC.addAction(cancelAction)
+            alertVC.addAction(actionCommit)
+            TopViewController().getTopViewController?.present(alertVC, animated: true, completion: nil)
+
+        } else {
+            guard let window = UIApplication.shared.keyWindow else {
                 return
             }
-            //去设置
-            if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                UIApplication.shared.openURL(url)
+            let info = AlertInfo(title: Bundle.localizedString("温馨提示"),
+                                 subTitle: nil,
+                                 needInput: nil,
+                                 cancel: Bundle.localizedString("取消"),
+                                 sure: Bundle.localizedString("去设置"),
+                                 content: content,
+                                 targetView: window)
+            Alert.shared.show(info: info) { (tag) in
+                if tag == 0 {
+                    return
+                }
+                //去设置
+                if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                    UIApplication.shared.openURL(url)
+                }
             }
         }
     }

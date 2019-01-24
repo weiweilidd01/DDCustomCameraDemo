@@ -24,6 +24,8 @@ public class DDPhotoStyleConfig: NSObject {
     
     ///MARK: - 基本参数设置
     
+    //是否使用DDKit/Hud提示框。主要为了e肚仔项目
+    public var isEnableDDKitHud = false
     //最大可选择的图片数量
     public var maxSelectedNumber: Int = 1
     //此属性只能设置从相册选择返回的图片大小。拍照无效
@@ -64,4 +66,13 @@ public class DDPhotoStyleConfig: NSObject {
     public var clipperSize: CGSize = CGSize(width: 250, height: 400)
     //长按拍摄动画进度条颜色
     public var circleProgressColor: UIColor = UIColor(red: 99.0/255.0, green: 181.0/255.0, blue: 244.0/255.0, alpha: 1)
+    
+    //MARK: -- 授权提示
+    //相册授权
+    public var photoPermission = "您没有使用照片的权限\n请在设置->隐私->照片中打开权限"
+    //相机授权
+    public var cameraPermission = "您没有使用相机的权限\n请在设置->隐私->相机中打开权限"
+    //麦克风授权
+    public var microphonePermission = "您没有使用麦克风的权限\n请在设置->隐私->麦克风中打开权限"
+
 }

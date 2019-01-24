@@ -8,8 +8,37 @@
 
 /* Begin PBXBuildFile section */
 		9FDFFE8362E05258CC364EC5 /* Pods_DDCustomCameraDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E3D40FC34E4EF2A0661BAD /* Pods_DDCustomCameraDemo.framework */; };
-		CE97609D21DF414200D572B4 /* Bundle+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE97609C21DF414200D572B4 /* Bundle+Localized.swift */; };
-		CE9760B521DF686100D572B4 /* DDPhotoStyleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9760B421DF686100D572B4 /* DDPhotoStyleConfig.swift */; };
+		CE7FB94121F9533B0020F5A2 /* DDCustomCameraResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB92121F9533B0020F5A2 /* DDCustomCameraResult.swift */; };
+		CE7FB94221F9533B0020F5A2 /* DDPhotoVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB92221F9533B0020F5A2 /* DDPhotoVideoView.swift */; };
+		CE7FB94321F9533B0020F5A2 /* DDPhotoImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB92321F9533B0020F5A2 /* DDPhotoImageManager.swift */; };
+		CE7FB94421F9533B0020F5A2 /* DDPhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB92421F9533B0020F5A2 /* DDPhotoPickerViewController.swift */; };
+		CE7FB94521F9533B0020F5A2 /* DDPhotoPreviewBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB92521F9533B0020F5A2 /* DDPhotoPreviewBottomView.swift */; };
+		CE7FB94621F9533B0020F5A2 /* DDPhotoGridCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB92621F9533B0020F5A2 /* DDPhotoGridCellModel.swift */; };
+		CE7FB94721F9533B0020F5A2 /* DDPhotoStyleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB92721F9533B0020F5A2 /* DDPhotoStyleConfig.swift */; };
+		CE7FB94821F9533B0020F5A2 /* DDPhotoPickerResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB92821F9533B0020F5A2 /* DDPhotoPickerResultModel.swift */; };
+		CE7FB94921F9533B0020F5A2 /* DDPhotoVideoBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB92921F9533B0020F5A2 /* DDPhotoVideoBottom.swift */; };
+		CE7FB94A21F9533B0020F5A2 /* DDPhotoPickerBorwserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB92A21F9533B0020F5A2 /* DDPhotoPickerBorwserCell.swift */; };
+		CE7FB94B21F9533B0020F5A2 /* DDPhotoPickerBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB92B21F9533B0020F5A2 /* DDPhotoPickerBottomView.swift */; };
+		CE7FB94C21F9533B0020F5A2 /* DDPhotoPickerTakePicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB92C21F9533B0020F5A2 /* DDPhotoPickerTakePicCell.swift */; };
+		CE7FB94D21F9533B0020F5A2 /* DDLandscapeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB92D21F9533B0020F5A2 /* DDLandscapeManager.swift */; };
+		CE7FB94E21F9533B0020F5A2 /* DDPhotoPickerBorwserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB92E21F9533B0020F5A2 /* DDPhotoPickerBorwserController.swift */; };
+		CE7FB94F21F9533B0020F5A2 /* DDPhotoSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB92F21F9533B0020F5A2 /* DDPhotoSlider.swift */; };
+		CE7FB95021F9533B0020F5A2 /* DDPhotoPickerNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB93021F9533B0020F5A2 /* DDPhotoPickerNavigationView.swift */; };
+		CE7FB95121F9533B0020F5A2 /* DDCustomCameraPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB93121F9533B0020F5A2 /* DDCustomCameraPlayer.swift */; };
+		CE7FB95221F9533B0020F5A2 /* DDPhotoPickerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB93221F9533B0020F5A2 /* DDPhotoPickerSource.swift */; };
+		CE7FB95321F9533B0020F5A2 /* DDPhotoPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB93321F9533B0020F5A2 /* DDPhotoPickerManager.swift */; };
+		CE7FB95421F9533B0020F5A2 /* DDCustomCameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB93421F9533B0020F5A2 /* DDCustomCameraManager.swift */; };
+		CE7FB95521F9533B0020F5A2 /* DDCustomCameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB93521F9533B0020F5A2 /* DDCustomCameraController.swift */; };
+		CE7FB95621F9533B0020F5A2 /* DDPhotoPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB93621F9533B0020F5A2 /* DDPhotoPickerCell.swift */; };
+		CE7FB95721F9533B0020F5A2 /* DDCustomCameraToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB93721F9533B0020F5A2 /* DDCustomCameraToolView.swift */; };
+		CE7FB95821F9533B0020F5A2 /* DDPhotoUploadBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB93821F9533B0020F5A2 /* DDPhotoUploadBrowserController.swift */; };
+		CE7FB95921F9533B0020F5A2 /* Bundle+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB93921F9533B0020F5A2 /* Bundle+Localized.swift */; };
+		CE7FB95A21F9533B0020F5A2 /* DDPhotoToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB93A21F9533B0020F5A2 /* DDPhotoToast.swift */; };
+		CE7FB95B21F9533B0020F5A2 /* DDClipperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB93B21F9533B0020F5A2 /* DDClipperView.swift */; };
+		CE7FB95C21F9533B0020F5A2 /* DDPhotoPickerNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB93C21F9533B0020F5A2 /* DDPhotoPickerNavigationController.swift */; };
+		CE7FB95D21F9533B0020F5A2 /* DDPhotoPickerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7FB93D21F9533B0020F5A2 /* DDPhotoPickerConfig.swift */; };
+		CE7FB95E21F9533B0020F5A2 /* DDCustomCamera.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE7FB93F21F9533B0020F5A2 /* DDCustomCamera.bundle */; };
+		CE7FB95F21F9533B0020F5A2 /* DDPhotoPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE7FB94021F9533B0020F5A2 /* DDPhotoPicker.bundle */; };
 		CEAC8E8421B65C09002363CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC8E8321B65C09002363CF /* AppDelegate.swift */; };
 		CEAC8E8621B65C09002363CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC8E8521B65C09002363CF /* ViewController.swift */; };
 		CEAC8E8921B65C09002363CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEAC8E8721B65C09002363CF /* Main.storyboard */; };
@@ -17,35 +46,6 @@
 		CEAC8E8E21B65C0A002363CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEAC8E8C21B65C0A002363CF /* LaunchScreen.storyboard */; };
 		CEAC8E9921B65C0A002363CF /* DDCustomCameraDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC8E9821B65C0A002363CF /* DDCustomCameraDemoTests.swift */; };
 		CEAC8EA421B65C0A002363CF /* DDCustomCameraDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC8EA321B65C0A002363CF /* DDCustomCameraDemoUITests.swift */; };
-		CEBBAAAA21D70E9500443825 /* DDCustomCameraResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA8C21D70E9500443825 /* DDCustomCameraResult.swift */; };
-		CEBBAAAB21D70E9500443825 /* DDPhotoVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA8D21D70E9500443825 /* DDPhotoVideoView.swift */; };
-		CEBBAAAC21D70E9500443825 /* DDPhotoImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA8E21D70E9500443825 /* DDPhotoImageManager.swift */; };
-		CEBBAAAD21D70E9500443825 /* DDPhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA8F21D70E9500443825 /* DDPhotoPickerViewController.swift */; };
-		CEBBAAAE21D70E9500443825 /* DDPhotoPreviewBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9021D70E9500443825 /* DDPhotoPreviewBottomView.swift */; };
-		CEBBAAAF21D70E9500443825 /* DDPhotoGridCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9121D70E9500443825 /* DDPhotoGridCellModel.swift */; };
-		CEBBAAB021D70E9500443825 /* DDPhotoPickerResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9221D70E9500443825 /* DDPhotoPickerResultModel.swift */; };
-		CEBBAAB121D70E9500443825 /* DDPhotoVideoBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9321D70E9500443825 /* DDPhotoVideoBottom.swift */; };
-		CEBBAAB221D70E9500443825 /* DDPhotoPickerBorwserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9421D70E9500443825 /* DDPhotoPickerBorwserCell.swift */; };
-		CEBBAAB321D70E9500443825 /* DDPhotoPickerBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9521D70E9500443825 /* DDPhotoPickerBottomView.swift */; };
-		CEBBAAB421D70E9500443825 /* DDPhotoPickerTakePicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9621D70E9500443825 /* DDPhotoPickerTakePicCell.swift */; };
-		CEBBAAB521D70E9500443825 /* DDLandscapeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9721D70E9500443825 /* DDLandscapeManager.swift */; };
-		CEBBAAB621D70E9500443825 /* DDPhotoPickerBorwserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9821D70E9500443825 /* DDPhotoPickerBorwserController.swift */; };
-		CEBBAAB721D70E9500443825 /* DDPhotoSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9921D70E9500443825 /* DDPhotoSlider.swift */; };
-		CEBBAAB821D70E9500443825 /* DDPhotoPickerNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9A21D70E9500443825 /* DDPhotoPickerNavigationView.swift */; };
-		CEBBAAB921D70E9500443825 /* DDCustomCameraPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9B21D70E9500443825 /* DDCustomCameraPlayer.swift */; };
-		CEBBAABA21D70E9500443825 /* DDPhotoPickerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9C21D70E9500443825 /* DDPhotoPickerSource.swift */; };
-		CEBBAABB21D70E9500443825 /* DDPhotoPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9D21D70E9500443825 /* DDPhotoPickerManager.swift */; };
-		CEBBAABC21D70E9500443825 /* DDCustomCameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9E21D70E9500443825 /* DDCustomCameraManager.swift */; };
-		CEBBAABD21D70E9500443825 /* DDCustomCameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAA9F21D70E9500443825 /* DDCustomCameraController.swift */; };
-		CEBBAABE21D70E9500443825 /* DDPhotoPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAAA021D70E9500443825 /* DDPhotoPickerCell.swift */; };
-		CEBBAABF21D70E9500443825 /* DDCustomCameraToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAAA121D70E9500443825 /* DDCustomCameraToolView.swift */; };
-		CEBBAAC021D70E9500443825 /* DDPhotoUploadBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAAA221D70E9500443825 /* DDPhotoUploadBrowserController.swift */; };
-		CEBBAAC121D70E9500443825 /* DDPhotoToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAAA321D70E9500443825 /* DDPhotoToast.swift */; };
-		CEBBAAC221D70E9500443825 /* DDClipperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAAA421D70E9500443825 /* DDClipperView.swift */; };
-		CEBBAAC321D70E9500443825 /* DDPhotoPickerNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAAA521D70E9500443825 /* DDPhotoPickerNavigationController.swift */; };
-		CEBBAAC421D70E9500443825 /* DDPhotoPickerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBAAA621D70E9500443825 /* DDPhotoPickerConfig.swift */; };
-		CEBBAAC521D70E9500443825 /* DDCustomCamera.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEBBAAA821D70E9500443825 /* DDCustomCamera.bundle */; };
-		CEBBAAC621D70E9500443825 /* DDPhotoPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEBBAAA921D70E9500443825 /* DDPhotoPicker.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,12 +69,41 @@
 		3221A3A6EC9E27AC91992212 /* Pods-DDCustomCameraDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDCustomCameraDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DDCustomCameraDemo/Pods-DDCustomCameraDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		6C2329C8932518F8C3B30B64 /* Pods-DDCustomCameraDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDCustomCameraDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DDCustomCameraDemo/Pods-DDCustomCameraDemo.release.xcconfig"; sourceTree = "<group>"; };
 		C1E3D40FC34E4EF2A0661BAD /* Pods_DDCustomCameraDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DDCustomCameraDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE97609C21DF414200D572B4 /* Bundle+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Localized.swift"; sourceTree = "<group>"; };
+		CE7FB92121F9533B0020F5A2 /* DDCustomCameraResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCustomCameraResult.swift; sourceTree = "<group>"; };
+		CE7FB92221F9533B0020F5A2 /* DDPhotoVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoVideoView.swift; sourceTree = "<group>"; };
+		CE7FB92321F9533B0020F5A2 /* DDPhotoImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoImageManager.swift; sourceTree = "<group>"; };
+		CE7FB92421F9533B0020F5A2 /* DDPhotoPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerViewController.swift; sourceTree = "<group>"; };
+		CE7FB92521F9533B0020F5A2 /* DDPhotoPreviewBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPreviewBottomView.swift; sourceTree = "<group>"; };
+		CE7FB92621F9533B0020F5A2 /* DDPhotoGridCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoGridCellModel.swift; sourceTree = "<group>"; };
+		CE7FB92721F9533B0020F5A2 /* DDPhotoStyleConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoStyleConfig.swift; sourceTree = "<group>"; };
+		CE7FB92821F9533B0020F5A2 /* DDPhotoPickerResultModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerResultModel.swift; sourceTree = "<group>"; };
+		CE7FB92921F9533B0020F5A2 /* DDPhotoVideoBottom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoVideoBottom.swift; sourceTree = "<group>"; };
+		CE7FB92A21F9533B0020F5A2 /* DDPhotoPickerBorwserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerBorwserCell.swift; sourceTree = "<group>"; };
+		CE7FB92B21F9533B0020F5A2 /* DDPhotoPickerBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerBottomView.swift; sourceTree = "<group>"; };
+		CE7FB92C21F9533B0020F5A2 /* DDPhotoPickerTakePicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerTakePicCell.swift; sourceTree = "<group>"; };
+		CE7FB92D21F9533B0020F5A2 /* DDLandscapeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDLandscapeManager.swift; sourceTree = "<group>"; };
+		CE7FB92E21F9533B0020F5A2 /* DDPhotoPickerBorwserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerBorwserController.swift; sourceTree = "<group>"; };
+		CE7FB92F21F9533B0020F5A2 /* DDPhotoSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoSlider.swift; sourceTree = "<group>"; };
+		CE7FB93021F9533B0020F5A2 /* DDPhotoPickerNavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerNavigationView.swift; sourceTree = "<group>"; };
+		CE7FB93121F9533B0020F5A2 /* DDCustomCameraPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCustomCameraPlayer.swift; sourceTree = "<group>"; };
+		CE7FB93221F9533B0020F5A2 /* DDPhotoPickerSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerSource.swift; sourceTree = "<group>"; };
+		CE7FB93321F9533B0020F5A2 /* DDPhotoPickerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerManager.swift; sourceTree = "<group>"; };
+		CE7FB93421F9533B0020F5A2 /* DDCustomCameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCustomCameraManager.swift; sourceTree = "<group>"; };
+		CE7FB93521F9533B0020F5A2 /* DDCustomCameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCustomCameraController.swift; sourceTree = "<group>"; };
+		CE7FB93621F9533B0020F5A2 /* DDPhotoPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerCell.swift; sourceTree = "<group>"; };
+		CE7FB93721F9533B0020F5A2 /* DDCustomCameraToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCustomCameraToolView.swift; sourceTree = "<group>"; };
+		CE7FB93821F9533B0020F5A2 /* DDPhotoUploadBrowserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoUploadBrowserController.swift; sourceTree = "<group>"; };
+		CE7FB93921F9533B0020F5A2 /* Bundle+Localized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Localized.swift"; sourceTree = "<group>"; };
+		CE7FB93A21F9533B0020F5A2 /* DDPhotoToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoToast.swift; sourceTree = "<group>"; };
+		CE7FB93B21F9533B0020F5A2 /* DDClipperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDClipperView.swift; sourceTree = "<group>"; };
+		CE7FB93C21F9533B0020F5A2 /* DDPhotoPickerNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerNavigationController.swift; sourceTree = "<group>"; };
+		CE7FB93D21F9533B0020F5A2 /* DDPhotoPickerConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerConfig.swift; sourceTree = "<group>"; };
+		CE7FB93F21F9533B0020F5A2 /* DDCustomCamera.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DDCustomCamera.bundle; sourceTree = "<group>"; };
+		CE7FB94021F9533B0020F5A2 /* DDPhotoPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DDPhotoPicker.bundle; sourceTree = "<group>"; };
 		CE9760A021DF4A3200D572B4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		CE9760A121DF4A3200D572B4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		CE9760A221DF4A3D00D572B4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		CE9760A321DF4A3D00D572B4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		CE9760B421DF686100D572B4 /* DDPhotoStyleConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDPhotoStyleConfig.swift; sourceTree = "<group>"; };
 		CEAC8E8021B65C09002363CF /* DDCustomCameraDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDCustomCameraDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEAC8E8321B65C09002363CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEAC8E8521B65C09002363CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -88,35 +117,6 @@
 		CEAC8E9F21B65C0A002363CF /* DDCustomCameraDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DDCustomCameraDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEAC8EA321B65C0A002363CF /* DDCustomCameraDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDCustomCameraDemoUITests.swift; sourceTree = "<group>"; };
 		CEAC8EA521B65C0A002363CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CEBBAA8C21D70E9500443825 /* DDCustomCameraResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCustomCameraResult.swift; sourceTree = "<group>"; };
-		CEBBAA8D21D70E9500443825 /* DDPhotoVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoVideoView.swift; sourceTree = "<group>"; };
-		CEBBAA8E21D70E9500443825 /* DDPhotoImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoImageManager.swift; sourceTree = "<group>"; };
-		CEBBAA8F21D70E9500443825 /* DDPhotoPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerViewController.swift; sourceTree = "<group>"; };
-		CEBBAA9021D70E9500443825 /* DDPhotoPreviewBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPreviewBottomView.swift; sourceTree = "<group>"; };
-		CEBBAA9121D70E9500443825 /* DDPhotoGridCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoGridCellModel.swift; sourceTree = "<group>"; };
-		CEBBAA9221D70E9500443825 /* DDPhotoPickerResultModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerResultModel.swift; sourceTree = "<group>"; };
-		CEBBAA9321D70E9500443825 /* DDPhotoVideoBottom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoVideoBottom.swift; sourceTree = "<group>"; };
-		CEBBAA9421D70E9500443825 /* DDPhotoPickerBorwserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerBorwserCell.swift; sourceTree = "<group>"; };
-		CEBBAA9521D70E9500443825 /* DDPhotoPickerBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerBottomView.swift; sourceTree = "<group>"; };
-		CEBBAA9621D70E9500443825 /* DDPhotoPickerTakePicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerTakePicCell.swift; sourceTree = "<group>"; };
-		CEBBAA9721D70E9500443825 /* DDLandscapeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDLandscapeManager.swift; sourceTree = "<group>"; };
-		CEBBAA9821D70E9500443825 /* DDPhotoPickerBorwserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerBorwserController.swift; sourceTree = "<group>"; };
-		CEBBAA9921D70E9500443825 /* DDPhotoSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoSlider.swift; sourceTree = "<group>"; };
-		CEBBAA9A21D70E9500443825 /* DDPhotoPickerNavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerNavigationView.swift; sourceTree = "<group>"; };
-		CEBBAA9B21D70E9500443825 /* DDCustomCameraPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCustomCameraPlayer.swift; sourceTree = "<group>"; };
-		CEBBAA9C21D70E9500443825 /* DDPhotoPickerSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerSource.swift; sourceTree = "<group>"; };
-		CEBBAA9D21D70E9500443825 /* DDPhotoPickerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerManager.swift; sourceTree = "<group>"; };
-		CEBBAA9E21D70E9500443825 /* DDCustomCameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCustomCameraManager.swift; sourceTree = "<group>"; };
-		CEBBAA9F21D70E9500443825 /* DDCustomCameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCustomCameraController.swift; sourceTree = "<group>"; };
-		CEBBAAA021D70E9500443825 /* DDPhotoPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerCell.swift; sourceTree = "<group>"; };
-		CEBBAAA121D70E9500443825 /* DDCustomCameraToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCustomCameraToolView.swift; sourceTree = "<group>"; };
-		CEBBAAA221D70E9500443825 /* DDPhotoUploadBrowserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoUploadBrowserController.swift; sourceTree = "<group>"; };
-		CEBBAAA321D70E9500443825 /* DDPhotoToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoToast.swift; sourceTree = "<group>"; };
-		CEBBAAA421D70E9500443825 /* DDClipperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDClipperView.swift; sourceTree = "<group>"; };
-		CEBBAAA521D70E9500443825 /* DDPhotoPickerNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerNavigationController.swift; sourceTree = "<group>"; };
-		CEBBAAA621D70E9500443825 /* DDPhotoPickerConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPhotoPickerConfig.swift; sourceTree = "<group>"; };
-		CEBBAAA821D70E9500443825 /* DDCustomCamera.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DDCustomCamera.bundle; sourceTree = "<group>"; };
-		CEBBAAA921D70E9500443825 /* DDPhotoPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DDPhotoPicker.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +162,60 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CE7FB91F21F9533B0020F5A2 /* CustomCamera */ = {
+			isa = PBXGroup;
+			children = (
+				CE7FB92021F9533B0020F5A2 /* Classes */,
+				CE7FB93E21F9533B0020F5A2 /* Assets */,
+			);
+			path = CustomCamera;
+			sourceTree = "<group>";
+		};
+		CE7FB92021F9533B0020F5A2 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CE7FB92121F9533B0020F5A2 /* DDCustomCameraResult.swift */,
+				CE7FB92221F9533B0020F5A2 /* DDPhotoVideoView.swift */,
+				CE7FB92321F9533B0020F5A2 /* DDPhotoImageManager.swift */,
+				CE7FB92421F9533B0020F5A2 /* DDPhotoPickerViewController.swift */,
+				CE7FB92521F9533B0020F5A2 /* DDPhotoPreviewBottomView.swift */,
+				CE7FB92621F9533B0020F5A2 /* DDPhotoGridCellModel.swift */,
+				CE7FB92721F9533B0020F5A2 /* DDPhotoStyleConfig.swift */,
+				CE7FB92821F9533B0020F5A2 /* DDPhotoPickerResultModel.swift */,
+				CE7FB92921F9533B0020F5A2 /* DDPhotoVideoBottom.swift */,
+				CE7FB92A21F9533B0020F5A2 /* DDPhotoPickerBorwserCell.swift */,
+				CE7FB92B21F9533B0020F5A2 /* DDPhotoPickerBottomView.swift */,
+				CE7FB92C21F9533B0020F5A2 /* DDPhotoPickerTakePicCell.swift */,
+				CE7FB92D21F9533B0020F5A2 /* DDLandscapeManager.swift */,
+				CE7FB92E21F9533B0020F5A2 /* DDPhotoPickerBorwserController.swift */,
+				CE7FB92F21F9533B0020F5A2 /* DDPhotoSlider.swift */,
+				CE7FB93021F9533B0020F5A2 /* DDPhotoPickerNavigationView.swift */,
+				CE7FB93121F9533B0020F5A2 /* DDCustomCameraPlayer.swift */,
+				CE7FB93221F9533B0020F5A2 /* DDPhotoPickerSource.swift */,
+				CE7FB93321F9533B0020F5A2 /* DDPhotoPickerManager.swift */,
+				CE7FB93421F9533B0020F5A2 /* DDCustomCameraManager.swift */,
+				CE7FB93521F9533B0020F5A2 /* DDCustomCameraController.swift */,
+				CE7FB93621F9533B0020F5A2 /* DDPhotoPickerCell.swift */,
+				CE7FB93721F9533B0020F5A2 /* DDCustomCameraToolView.swift */,
+				CE7FB93821F9533B0020F5A2 /* DDPhotoUploadBrowserController.swift */,
+				CE7FB93921F9533B0020F5A2 /* Bundle+Localized.swift */,
+				CE7FB93A21F9533B0020F5A2 /* DDPhotoToast.swift */,
+				CE7FB93B21F9533B0020F5A2 /* DDClipperView.swift */,
+				CE7FB93C21F9533B0020F5A2 /* DDPhotoPickerNavigationController.swift */,
+				CE7FB93D21F9533B0020F5A2 /* DDPhotoPickerConfig.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		CE7FB93E21F9533B0020F5A2 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				CE7FB93F21F9533B0020F5A2 /* DDCustomCamera.bundle */,
+				CE7FB94021F9533B0020F5A2 /* DDPhotoPicker.bundle */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		CE9760AB21DF4CCE00D572B4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,7 +248,7 @@
 		CEAC8E8221B65C09002363CF /* DDCustomCameraDemo */ = {
 			isa = PBXGroup;
 			children = (
-				CEBBAA8A21D70E9500443825 /* CustomCamera */,
+				CE7FB91F21F9533B0020F5A2 /* CustomCamera */,
 				CEAC8E8321B65C09002363CF /* AppDelegate.swift */,
 				CEAC8E8521B65C09002363CF /* ViewController.swift */,
 				CE9760AB21DF4CCE00D572B4 /* Resources */,
@@ -222,60 +276,6 @@
 				CEAC8EA521B65C0A002363CF /* Info.plist */,
 			);
 			path = DDCustomCameraDemoUITests;
-			sourceTree = "<group>";
-		};
-		CEBBAA8A21D70E9500443825 /* CustomCamera */ = {
-			isa = PBXGroup;
-			children = (
-				CEBBAA8B21D70E9500443825 /* Classes */,
-				CEBBAAA721D70E9500443825 /* Assets */,
-			);
-			path = CustomCamera;
-			sourceTree = "<group>";
-		};
-		CEBBAA8B21D70E9500443825 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				CEBBAA8C21D70E9500443825 /* DDCustomCameraResult.swift */,
-				CEBBAA8D21D70E9500443825 /* DDPhotoVideoView.swift */,
-				CEBBAA8E21D70E9500443825 /* DDPhotoImageManager.swift */,
-				CEBBAA8F21D70E9500443825 /* DDPhotoPickerViewController.swift */,
-				CEBBAA9021D70E9500443825 /* DDPhotoPreviewBottomView.swift */,
-				CEBBAA9121D70E9500443825 /* DDPhotoGridCellModel.swift */,
-				CEBBAA9221D70E9500443825 /* DDPhotoPickerResultModel.swift */,
-				CEBBAA9321D70E9500443825 /* DDPhotoVideoBottom.swift */,
-				CEBBAA9421D70E9500443825 /* DDPhotoPickerBorwserCell.swift */,
-				CEBBAA9521D70E9500443825 /* DDPhotoPickerBottomView.swift */,
-				CEBBAA9621D70E9500443825 /* DDPhotoPickerTakePicCell.swift */,
-				CEBBAA9721D70E9500443825 /* DDLandscapeManager.swift */,
-				CEBBAA9821D70E9500443825 /* DDPhotoPickerBorwserController.swift */,
-				CEBBAA9921D70E9500443825 /* DDPhotoSlider.swift */,
-				CEBBAA9A21D70E9500443825 /* DDPhotoPickerNavigationView.swift */,
-				CEBBAA9B21D70E9500443825 /* DDCustomCameraPlayer.swift */,
-				CEBBAA9C21D70E9500443825 /* DDPhotoPickerSource.swift */,
-				CEBBAA9D21D70E9500443825 /* DDPhotoPickerManager.swift */,
-				CEBBAA9E21D70E9500443825 /* DDCustomCameraManager.swift */,
-				CEBBAA9F21D70E9500443825 /* DDCustomCameraController.swift */,
-				CEBBAAA021D70E9500443825 /* DDPhotoPickerCell.swift */,
-				CEBBAAA121D70E9500443825 /* DDCustomCameraToolView.swift */,
-				CEBBAAA221D70E9500443825 /* DDPhotoUploadBrowserController.swift */,
-				CEBBAAA321D70E9500443825 /* DDPhotoToast.swift */,
-				CEBBAAA421D70E9500443825 /* DDClipperView.swift */,
-				CEBBAAA521D70E9500443825 /* DDPhotoPickerNavigationController.swift */,
-				CEBBAAA621D70E9500443825 /* DDPhotoPickerConfig.swift */,
-				CE97609C21DF414200D572B4 /* Bundle+Localized.swift */,
-				CE9760B421DF686100D572B4 /* DDPhotoStyleConfig.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		CEBBAAA721D70E9500443825 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				CEBBAAA821D70E9500443825 /* DDCustomCamera.bundle */,
-				CEBBAAA921D70E9500443825 /* DDPhotoPicker.bundle */,
-			);
-			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -387,8 +387,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEAC8E8E21B65C0A002363CF /* LaunchScreen.storyboard in Resources */,
-				CEBBAAC621D70E9500443825 /* DDPhotoPicker.bundle in Resources */,
-				CEBBAAC521D70E9500443825 /* DDCustomCamera.bundle in Resources */,
+				CE7FB95F21F9533B0020F5A2 /* DDPhotoPicker.bundle in Resources */,
+				CE7FB95E21F9533B0020F5A2 /* DDCustomCamera.bundle in Resources */,
 				CEAC8E8B21B65C0A002363CF /* Assets.xcassets in Resources */,
 				CEAC8E8921B65C09002363CF /* Main.storyboard in Resources */,
 			);
@@ -468,37 +468,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEBBAAC121D70E9500443825 /* DDPhotoToast.swift in Sources */,
-				CEBBAAB321D70E9500443825 /* DDPhotoPickerBottomView.swift in Sources */,
-				CEBBAAB421D70E9500443825 /* DDPhotoPickerTakePicCell.swift in Sources */,
-				CEBBAAB821D70E9500443825 /* DDPhotoPickerNavigationView.swift in Sources */,
-				CEBBAAC221D70E9500443825 /* DDClipperView.swift in Sources */,
-				CEBBAABD21D70E9500443825 /* DDCustomCameraController.swift in Sources */,
-				CEBBAAC321D70E9500443825 /* DDPhotoPickerNavigationController.swift in Sources */,
-				CEBBAAAA21D70E9500443825 /* DDCustomCameraResult.swift in Sources */,
-				CEBBAAB721D70E9500443825 /* DDPhotoSlider.swift in Sources */,
-				CEBBAAB221D70E9500443825 /* DDPhotoPickerBorwserCell.swift in Sources */,
-				CEBBAAB921D70E9500443825 /* DDCustomCameraPlayer.swift in Sources */,
-				CE97609D21DF414200D572B4 /* Bundle+Localized.swift in Sources */,
-				CEBBAAAE21D70E9500443825 /* DDPhotoPreviewBottomView.swift in Sources */,
-				CEBBAABB21D70E9500443825 /* DDPhotoPickerManager.swift in Sources */,
-				CE9760B521DF686100D572B4 /* DDPhotoStyleConfig.swift in Sources */,
-				CEBBAAB621D70E9500443825 /* DDPhotoPickerBorwserController.swift in Sources */,
-				CEBBAAAC21D70E9500443825 /* DDPhotoImageManager.swift in Sources */,
-				CEBBAAAB21D70E9500443825 /* DDPhotoVideoView.swift in Sources */,
-				CEBBAAB021D70E9500443825 /* DDPhotoPickerResultModel.swift in Sources */,
-				CEBBAAC421D70E9500443825 /* DDPhotoPickerConfig.swift in Sources */,
-				CEBBAAC021D70E9500443825 /* DDPhotoUploadBrowserController.swift in Sources */,
-				CEBBAAB121D70E9500443825 /* DDPhotoVideoBottom.swift in Sources */,
-				CEBBAAB521D70E9500443825 /* DDLandscapeManager.swift in Sources */,
-				CEBBAAAD21D70E9500443825 /* DDPhotoPickerViewController.swift in Sources */,
-				CEBBAABC21D70E9500443825 /* DDCustomCameraManager.swift in Sources */,
-				CEBBAABE21D70E9500443825 /* DDPhotoPickerCell.swift in Sources */,
+				CE7FB95321F9533B0020F5A2 /* DDPhotoPickerManager.swift in Sources */,
+				CE7FB94121F9533B0020F5A2 /* DDCustomCameraResult.swift in Sources */,
+				CE7FB95921F9533B0020F5A2 /* Bundle+Localized.swift in Sources */,
+				CE7FB95821F9533B0020F5A2 /* DDPhotoUploadBrowserController.swift in Sources */,
+				CE7FB95621F9533B0020F5A2 /* DDPhotoPickerCell.swift in Sources */,
+				CE7FB94521F9533B0020F5A2 /* DDPhotoPreviewBottomView.swift in Sources */,
+				CE7FB94321F9533B0020F5A2 /* DDPhotoImageManager.swift in Sources */,
+				CE7FB94221F9533B0020F5A2 /* DDPhotoVideoView.swift in Sources */,
+				CE7FB95C21F9533B0020F5A2 /* DDPhotoPickerNavigationController.swift in Sources */,
+				CE7FB94921F9533B0020F5A2 /* DDPhotoVideoBottom.swift in Sources */,
+				CE7FB95221F9533B0020F5A2 /* DDPhotoPickerSource.swift in Sources */,
+				CE7FB95D21F9533B0020F5A2 /* DDPhotoPickerConfig.swift in Sources */,
+				CE7FB94A21F9533B0020F5A2 /* DDPhotoPickerBorwserCell.swift in Sources */,
+				CE7FB94421F9533B0020F5A2 /* DDPhotoPickerViewController.swift in Sources */,
+				CE7FB94E21F9533B0020F5A2 /* DDPhotoPickerBorwserController.swift in Sources */,
+				CE7FB94821F9533B0020F5A2 /* DDPhotoPickerResultModel.swift in Sources */,
+				CE7FB94F21F9533B0020F5A2 /* DDPhotoSlider.swift in Sources */,
 				CEAC8E8621B65C09002363CF /* ViewController.swift in Sources */,
-				CEBBAABF21D70E9500443825 /* DDCustomCameraToolView.swift in Sources */,
-				CEBBAAAF21D70E9500443825 /* DDPhotoGridCellModel.swift in Sources */,
+				CE7FB94D21F9533B0020F5A2 /* DDLandscapeManager.swift in Sources */,
+				CE7FB95521F9533B0020F5A2 /* DDCustomCameraController.swift in Sources */,
+				CE7FB94B21F9533B0020F5A2 /* DDPhotoPickerBottomView.swift in Sources */,
+				CE7FB95721F9533B0020F5A2 /* DDCustomCameraToolView.swift in Sources */,
+				CE7FB94C21F9533B0020F5A2 /* DDPhotoPickerTakePicCell.swift in Sources */,
+				CE7FB95121F9533B0020F5A2 /* DDCustomCameraPlayer.swift in Sources */,
+				CE7FB94721F9533B0020F5A2 /* DDPhotoStyleConfig.swift in Sources */,
+				CE7FB95021F9533B0020F5A2 /* DDPhotoPickerNavigationView.swift in Sources */,
+				CE7FB95421F9533B0020F5A2 /* DDCustomCameraManager.swift in Sources */,
+				CE7FB95B21F9533B0020F5A2 /* DDClipperView.swift in Sources */,
+				CE7FB94621F9533B0020F5A2 /* DDPhotoGridCellModel.swift in Sources */,
+				CE7FB95A21F9533B0020F5A2 /* DDPhotoToast.swift in Sources */,
 				CEAC8E8421B65C09002363CF /* AppDelegate.swift in Sources */,
-				CEBBAABA21D70E9500443825 /* DDPhotoPickerSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

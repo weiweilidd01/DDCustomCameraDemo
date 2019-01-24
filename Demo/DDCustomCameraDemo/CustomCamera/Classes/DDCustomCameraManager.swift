@@ -68,26 +68,28 @@ extension DDCustomCameraManager {
         //先授权相册
         DDCustomCameraManager.authorizePhoto { (res) in
             if res == false {
-                DDPhotoPickerManager.showAlert(Bundle.localizedString("photoPermission"))
+                DDPhotoPickerManager.showAlert(DDPhotoStyleConfig.shared.photoPermission)
                 return
             }
             //再授权相机
-            DDCustomCameraManager.authorizeCamera {[weak self] (res) in
+            DDCustomCameraManager.authorizeCamera {(res) in
                 if res == false {
-                    DDPhotoPickerManager.showAlert(Bundle.localizedString("cameraPermission"))
+                    DDPhotoPickerManager.showAlert(DDPhotoStyleConfig.shared.cameraPermission)
                     return
                 }
                 //最后授权麦克风
                 if DDPhotoStyleConfig.shared.isEnableRecordVideo == true {
-                    DDCustomCameraManager.authorizeMicrophone {[weak self] (res) in
+                    DDCustomCameraManager.authorizeMicrophone { (res) in
                         if res == false {
-                            DDPhotoPickerManager.showAlert(Bundle.localizedString("microphonePermission"))
+                            DDPhotoPickerManager.showAlert(DDPhotoStyleConfig.shared.microphonePermission)
                             return
                         }
-                        self?.showCamera()
+                        //类方法不会循环引用，不能设为weak，否则self为空
+                        self.showCamera()
                     }
                 } else {
-                    self?.showCamera()
+                    //类方法不会循环引用，不能设为weak，否则self为空
+                    self.showCamera()
                 }
             }
         }
