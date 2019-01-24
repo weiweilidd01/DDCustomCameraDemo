@@ -106,7 +106,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func takePicAction(_ sender: Any) {
-        //请勿使用weak ，否则会被释放，获取不到回调
+        //请勿使用weak ，否则会被释放，获取不到回调,类方法block无需担心循环引用
         DDCustomCameraManager.show { (arr) in
 
             self.photoView.image = arr?.first?.image
