@@ -21,7 +21,7 @@ class DDClipperView: UIView {
     
     private lazy var fillLayer: CAShapeLayer? = {
         let fillLayer = CAShapeLayer()
-        fillLayer.fillRule = kCAFillRuleEvenOdd
+        fillLayer.fillRule = CAShapeLayerFillRule.evenOdd
         fillLayer.fillColor = UIColor.black.cgColor
         fillLayer.opacity = 0.5
         return fillLayer
@@ -47,7 +47,7 @@ class DDClipperView: UIView {
 
 private extension DDClipperView {
     func setupUI() {
-        layer.contentsGravity = kCAGravityResizeAspectFill
+        layer.contentsGravity = CALayerContentsGravity.resizeAspectFill
         if let clipperView = clipperImgView {
             addSubview(clipperView)
         }

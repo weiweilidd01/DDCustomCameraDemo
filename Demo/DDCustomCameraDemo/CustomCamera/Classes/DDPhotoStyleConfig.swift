@@ -69,10 +69,10 @@ public class DDPhotoStyleConfig: NSObject {
     
     //MARK: -- 授权提示
     //相册授权
-    public var photoPermission = "您没有使用照片的权限\n请在设置->隐私->照片中打开权限"
+    public var photoPermission = "photoPermission"
     //相机授权
-    public var cameraPermission = "您没有使用相机的权限\n请在设置->隐私->相机中打开权限"
+    public var cameraPermission = "cameraPermission"
     //麦克风授权
-    public var microphonePermission = "您没有使用麦克风的权限\n请在设置->隐私->麦克风中打开权限"
+    public var microphonePermission = "microphonePermission"
 
 }

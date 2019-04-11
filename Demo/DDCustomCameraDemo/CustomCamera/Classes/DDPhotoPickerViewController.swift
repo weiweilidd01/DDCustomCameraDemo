@@ -128,7 +128,7 @@ class DDPhotoPickerViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        var inset = UIEdgeInsetsMake(0, 0, 0, 0);
+        var inset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0);
         if #available(iOS 11.0, *) {
             inset = view.safeAreaInsets
         }

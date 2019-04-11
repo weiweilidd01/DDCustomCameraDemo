@@ -418,7 +418,7 @@ private extension DDCustomCameraManager {
         }
         let actionCommit = UIAlertAction(title: "去设置", style: .default) { (action) in
             //去设置
-            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.openURL(url)
             }
         }
@@ -682,7 +682,7 @@ private extension DDCustomCameraManager {
         options.isNetworkAccessAllowed = true
         
         PHImageManager.default().requestAVAsset(forVideo: asset, options: options) { (avAsset, audioMix, info) in
-            self.export(for: avAsset, range: CMTimeRange(start: kCMTimeZero, duration: kCMTimePositiveInfinity), type: type, presetName: presetName, complete: { (exportFilePath, error) in
+            self.export(for: avAsset, range: CMTimeRange(start: CMTime.zero, duration: CMTime.positiveInfinity), type: type, presetName: presetName, complete: { (exportFilePath, error) in
                 DispatchQueue.main.async(execute: {
                     if complete != nil {
                         complete?(exportFilePath, error)

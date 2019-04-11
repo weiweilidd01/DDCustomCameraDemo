@@ -113,9 +113,9 @@ private extension DDCustomCameraPlayer {
 
 extension DDCustomCameraPlayer {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        let status: AVPlayerItemStatus
+        let status: AVPlayerItem.Status
         if let statusNumber = change?[.newKey] as? NSNumber {
-            status = AVPlayerItemStatus(rawValue: statusNumber.intValue)!
+            status = AVPlayerItem.Status(rawValue: statusNumber.intValue)!
         } else {
             status = .unknown
         }
@@ -127,7 +127,7 @@ extension DDCustomCameraPlayer {
         }
     }
     @objc func playFinished() {
-        player?.seek(to: kCMTimeZero)
+        player?.seek(to: CMTime.zero)
         player?.play()
     }
 }

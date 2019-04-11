@@ -17,7 +17,7 @@ class DDPhotoPickerNavigationController: UINavigationController {
     public var barTintColor: UIColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1) {
         didSet {
             navigationBar.tintColor = barTintColor
-            navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: barTintColor]
+            navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: barTintColor]
         }
     }
     public var barColor: UIColor = UIColor(red: 25.0/255.0, green: 25.0/255.0, blue: 25.0/255.0, alpha: 1) {
@@ -39,10 +39,10 @@ class DDPhotoPickerNavigationController: UINavigationController {
         
         if let color = DDPhotoStyleConfig.shared.navigationTintColor {
             navigationBar.tintColor = color
-            navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: color]
+            navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: color]
         } else {
             navigationBar.tintColor = barTintColor
-            navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: barTintColor]
+            navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: barTintColor]
         }
         
         if let image = DDPhotoStyleConfig.shared.navigationBackImage {

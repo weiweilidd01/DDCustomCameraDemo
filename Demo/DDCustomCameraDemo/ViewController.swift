@@ -60,10 +60,13 @@ class ViewController: UIViewController {
         
         
         
-//        DDPhotoStyleConfig.shared.photoAssetType = .imageOnly
+        DDPhotoStyleConfig.shared.photoAssetType = .imageOnly
         //若你的第一级入口为选择照片，那个在相册中的进入拍照时，是否允许摄像
-//        DDPhotoStyleConfig.shared.isEnableRecordVideo = false
+        DDPhotoStyleConfig.shared.isEnableRecordVideo = false
+        DDPhotoStyleConfig.shared.isShowClipperView = true
         DDPhotoStyleConfig.shared.maxSelectedNumber = 9
+        DDPhotoStyleConfig.shared.isEnableDDKitHud = true
+
     }
     
     @objc func tapAction() {

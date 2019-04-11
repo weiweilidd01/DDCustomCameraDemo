@@ -118,7 +118,7 @@ extension DDPhotoPickerManager {
             }
             let actionCommit = UIAlertAction(title: "去设置", style: .default) { (action) in
                 //去设置
-                if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.openURL(url)
                 }
             }
@@ -135,14 +135,14 @@ extension DDPhotoPickerManager {
                                  needInput: nil,
                                  cancel: Bundle.localizedString("取消"),
                                  sure: Bundle.localizedString("去设置"),
-                                 content: content,
+                                 content: Bundle.localizedString(content),
                                  targetView: window)
             Alert.shared.show(info: info) { (tag) in
                 if tag == 0 {
                     return
                 }
                 //去设置
-                if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.openURL(url)
                 }
             }

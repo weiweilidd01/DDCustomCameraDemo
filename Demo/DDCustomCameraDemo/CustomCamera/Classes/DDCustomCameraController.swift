@@ -213,7 +213,7 @@ class DDCustomCameraController: UIViewController {
         if session.isRunning == true {
             session.stopRunning()
         }
-       try? AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
+       try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
         NotificationCenter.default.removeObserver(self)
     }
 }
@@ -306,6 +306,7 @@ extension DDCustomCameraController: DDCustomCameraToolViewDelegate {
     }
     
     func onTakePicture() {
+        hiddenBtn(bool: true)
         let videoConnection = imageOutPut?.connection(with: .video)
         videoConnection?.videoOrientation = orientation ?? .portrait
         
@@ -362,6 +363,7 @@ extension DDCustomCameraController: DDCustomCameraToolViewDelegate {
         session.startRunning()
         takedImageView.isHidden = true
         deleteVideo()
+        hiddenBtn(bool: false)
     }
     
     func onOkClick() {
@@ -479,11 +481,11 @@ private extension DDCustomCameraController {
             let urlAsset = AVURLAsset(url: url, options: opts)
             let genarator = AVAssetImageGenerator(asset: urlAsset)
             genarator.appliesPreferredTrackTransform = true
-            genarator.requestedTimeToleranceAfter = kCMTimeZero
-            genarator.requestedTimeToleranceBefore = kCMTimeZero
+            genarator.requestedTimeToleranceAfter = CMTime.zero
+            genarator.requestedTimeToleranceBefore = CMTime.zero
             let secondes = duration.seconds
             //1 代码最后一帧
-            let time = CMTimeMakeWithSeconds(secondes, 1)
+            let time = CMTimeMakeWithSeconds(secondes, preferredTimescale: 1)
             genarator.maximumSize = CGSize(width: size.width, height: size.height)
             let img = try? genarator.copyCGImage(at: time, actualTime: nil)
             DispatchQueue.main.async(execute: {
@@ -524,6 +526,12 @@ private extension DDCustomCameraController {
             //清空videoUrl
             videoUrl = nil
         }
+    }
+    
+    func hiddenBtn(bool: Bool) {
+        toggleCameraBtn.isHidden = bool
+        flashlightBtn.isHidden = bool
+        closeBtn.isHidden = bool
     }
     
     func setupUI() {
@@ -589,7 +597,7 @@ private extension DDCustomCameraController {
         
         movieFileOutPut = AVCaptureMovieFileOutput()
         //必须设置，否则默认超过10s就没声音
-        movieFileOutPut?.movieFragmentInterval = kCMTimeInvalid
+        movieFileOutPut?.movieFragmentInterval = CMTime.invalid
         //将视频及音频输入流添加到session
         if let videoInput = videoInput  {
             if session.canAddInput(videoInput) == true {
@@ -720,7 +728,7 @@ private extension DDCustomCameraController {
     }
     
     func addNotification() {
-          NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+          NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil)
     }
     
     func onDismiss() {

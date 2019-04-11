@@ -57,7 +57,7 @@ class DDPhotoPickerBorwserController: UIViewController {
         //设置ui
         setupUI()
         //添加屏幕旋转通知
-        NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationChanged(_:)), name: NSNotification.Name.UIApplicationWillChangeStatusBarOrientation, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationChanged(_:)), name: UIApplication.willChangeStatusBarOrientationNotification, object: nil)
     }
     
     @objc func deviceOrientationChanged(_ notify: Notification) {
@@ -102,7 +102,7 @@ class DDPhotoPickerBorwserController: UIViewController {
         super.viewDidLayoutSubviews()
         let screenWidth: CGFloat = UIScreen.main.bounds.size.width
         let screenHeight: CGFloat = UIScreen.main.bounds.size.height
-        var inset = UIEdgeInsetsMake(20, 0, 0, 0);
+        var inset = UIEdgeInsets.init(top: 20, left: 0, bottom: 0, right: 0);
         if #available(iOS 11.0, *) {
             inset = view.safeAreaInsets
         }
@@ -114,7 +114,7 @@ class DDPhotoPickerBorwserController: UIViewController {
             make.bottom.equalTo(view.snp_bottomMargin)
         }
         
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        flowLayout.sectionInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
         flowLayout.itemSize = CGSize(width: screenWidth + 10, height: screenHeight)
         photoCollectionView?.frame = CGRect(x: 0, y: 0, width: screenWidth + 10, height: screenHeight)
         
@@ -124,8 +124,8 @@ class DDPhotoPickerBorwserController: UIViewController {
         }
     }
 
-    override func didMove(toParentViewController parent: UIViewController?) {
-        super.didMove(toParentViewController: parent)
+    override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
         //如果dismiss就取消所有在下载的图片
         if parent == nil {
             for id in requestImageIDs {
@@ -305,8 +305,8 @@ private extension DDPhotoPickerBorwserController {
         
         //添加底部bottom
         view.addSubview(bottomView)
-        view.bringSubview(toFront: navigationView)
-        view.bringSubview(toFront: bottomView)
+        view.bringSubviewToFront(navigationView)
+        view.bringSubviewToFront(bottomView)
         
         //回调
         bottomView.rightBtnCallBack = {[weak self] in

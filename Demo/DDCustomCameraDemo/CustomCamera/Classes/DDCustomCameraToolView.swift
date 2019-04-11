@@ -362,7 +362,7 @@ extension UIButton {
             let imageSize = self.imageRect(forContentRect: self.frame)
             var titleSize = CGRect.zero
             if let txtFont = titleLabel.font, let str = titleLabel.text {
-                titleSize = (str as NSString).boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: txtFont], context: nil)
+                titleSize = (str as NSString).boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: txtFont], context: nil)
             }
             let spacing: CGFloat = 6
             titleEdgeInsets = UIEdgeInsets(top: imageSize.height + titleSize.height + spacing, left: -imageSize.width, bottom: 0, right: 0)

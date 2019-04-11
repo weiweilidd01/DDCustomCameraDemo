@@ -35,11 +35,11 @@ class DDPhotoVideoView: UIView {
 
     //监听player时间回调
     private var timeObserver: Any?
-    private var playerItemStatus: AVPlayerItemStatus = .unknown
+    private var playerItemStatus: AVPlayerItem.Status = .unknown
 
     var model: DDPhotoGridCellModel? {
         didSet {
-            bringSubview(toFront: playBtn)
+            bringSubviewToFront(playBtn)
             playBtn.isHidden = false
             bottomView.isHidden = true
             reset()
@@ -63,7 +63,7 @@ class DDPhotoVideoView: UIView {
         
         playLayer.frame = bounds
         
-        var inset = UIEdgeInsetsMake(0, 0, 0, 0);
+        var inset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0);
         if #available(iOS 11.0, *) {
             inset = safeAreaInsets
         }
@@ -83,7 +83,7 @@ extension DDPhotoVideoView {
    public func play() {
         playBtn.isHidden = true
         bottomView.isHidden = false
-        bringSubview(toFront: bottomView)
+        bringSubviewToFront(bottomView)
         player?.play()
         bottomView.changePlayBtnImage(true)
     }
@@ -91,7 +91,7 @@ extension DDPhotoVideoView {
    public func pause() {
         playBtn.isHidden = false
         bottomView.isHidden = true
-        bringSubview(toFront: playBtn)
+        bringSubviewToFront(playBtn)
         player?.pause()
         bottomView.changePlayBtnImage(false)
     }
@@ -116,7 +116,7 @@ extension DDPhotoVideoView {
     
         DispatchQueue.main.async { [weak self]  in
             self?.pause()
-            self?.player?.currentItem?.seek(to: CMTimeMakeWithSeconds(time, Int32(NSEC_PER_SEC)), completionHandler: { (finished) in
+            self?.player?.currentItem?.seek(to: CMTimeMakeWithSeconds(time, preferredTimescale: Int32(NSEC_PER_SEC)), completionHandler: { (finished) in
                 DispatchQueue.main.async(execute: {
                     self?.play()
                     if let completion = completion {
@@ -229,15 +229,15 @@ extension DDPhotoVideoView: UIGestureRecognizerDelegate {
     @objc func playFinished() {
         playBtn.isHidden = false
         bottomView.isHidden = true
-        bringSubview(toFront: playBtn)
-        player?.seek(to: kCMTimeZero)
+        bringSubviewToFront(playBtn)
+        player?.seek(to: CMTime.zero)
         setHiddenPreviewCallBack(true)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        let status: AVPlayerItemStatus
+        let status: AVPlayerItem.Status
         if let statusNumber = change?[.newKey] as? NSNumber {
-            status = AVPlayerItemStatus(rawValue: statusNumber.intValue)!
+            status = AVPlayerItem.Status(rawValue: statusNumber.intValue)!
         } else {
             status = .unknown
         }

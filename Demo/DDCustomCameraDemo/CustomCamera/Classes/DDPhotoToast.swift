@@ -36,7 +36,7 @@ class DDPhotoToast: NSObject {
             toast.layer.masksToBounds = true
             let size = msg.boundingRect(with: CGSize(width: 220, height: 999),
                                         options: .usesLineFragmentOrigin,
-                                        attributes: [NSAttributedStringKey.font: toast.font],
+                                        attributes: [NSAttributedString.Key.font: toast.font],
                                         context: nil).size
             let height = size.height + 15.0
             let width = size.width <= 220.0 ? size.width + 30 : 220
